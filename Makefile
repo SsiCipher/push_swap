@@ -7,7 +7,7 @@ SRCS	=	src/stack.c src/operations.c src/sort.c src/check.c \
 
 LIBS	=	libft
 
-all: $(NAME)
+all: libs $(NAME)
 
 libs: $(LIBS)
 
@@ -23,5 +23,7 @@ clean:
 	rm -rf $(NAME)
 
 fclean: clean
+	make -C libs/libft fclean
+	rm -rf libs/libft.a
 
 re: fclean all

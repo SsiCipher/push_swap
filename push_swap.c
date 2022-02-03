@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cipher <cipher@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:07:56 by yanab             #+#    #+#             */
-/*   Updated: 2022/02/01 21:56:09 by yanab            ###   ########.fr       */
+/*   Updated: 2022/02/02 19:48:19 by cipher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int	cmp(int a, int b)
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
-	t_stack	*stack_b;
+	// t_stack	*stack_b;
 	int		*tmp_arr;
 
 	stack_a = NULL;
-	stack_b = NULL;
+	// stack_b = NULL;
 	if (argc <= 1)
 		print_err("Error: you have to provide a list of numbers\n");
 	if (argc == 2)
@@ -40,14 +40,26 @@ int	main(int argc, char **argv)
 		s(&stack_a, 'a');
 	else if (argc - 1 == 3)
 	{
-		if (tmp_arr[1] < tmp_arr[0] && tmp_arr[1] < tmp_arr[2]  && tmp_arr[0] < tmp_arr[2])
+		int arr[3];
+		arr[0] = stack_a->content;
+		arr[1] = stack_a->next->content;
+		arr[2] = stack_a->next->next->content;
+		while (!is_sorted(3, arr))
 		{
-			s(&stack_a, 'a');
+			if (arr[0] > arr[1] && arr[0] > arr[2])
+				r(&stack_a, 'a');
+			else if (arr[1] > arr[0] && arr[1] > arr[2])
+				rr(&stack_a, 'a');
+			else if (arr[0] > arr[1])
+				s(&stack_a, 'a');
+			arr[0] = stack_a->content;
+			arr[1] = stack_a->next->content;
+			arr[2] = stack_a->next->next->content;
 		}
-		else if (tmp_arr[1] < tmp_arr[0] && tmp_arr[1] < tmp_arr[2] && tmp_arr[0] > tmp_arr[2])
-		{
-			r(&stack_a, 'a');
-		}
+	}
+	else if (argc - 1 == 5)
+	{
+
 	}
 
 	print_stack(stack_a, 'a');
