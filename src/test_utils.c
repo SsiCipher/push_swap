@@ -6,24 +6,25 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 21:07:39 by yanab             #+#    #+#             */
-/*   Updated: 2022/02/04 01:34:45 by yanab            ###   ########.fr       */
+/*   Updated: 2022/02/04 02:52:35 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	print_stack(t_stack *stack_top, char stack_id)
+void	print_stacks(t_stack *stack_a, t_stack *stack_b)
 {
-	// int	i;
+	char	a, b;
 
-	// i = 1;
-	printf("Stack {%c}:\n", stack_id);
-	if (stack_top == NULL)
-		printf("\tStack is empty\n");
-	while (stack_top != NULL)
+	printf("\ta\tb\n");
+	printf("\t-\t-\n");
+	while (stack_a != NULL || stack_b != NULL)
 	{
-		printf("\tNode [%d]: %d\n", stack_top->index, stack_top->content);
-		stack_top = stack_top -> next;
+		a = stack_a ? (stack_a->content + '0') : ' ';
+		b = stack_b ? (stack_b->content + '0') : ' ';
+		printf("\t%c\t%c\n", a, b);
+		stack_a = stack_a ? stack_a->next : stack_a;
+		stack_b = stack_b ? stack_b->next : stack_b;
 	}
 }
 
@@ -38,8 +39,7 @@ void	print_ops_count(void)
 void	print_info(t_stack *stack_a, t_stack *stack_b)
 {
 	print_ops_count();
-	print_stack(stack_a, 'a');
-	print_stack(stack_b, 'b');
+	print_stacks(stack_a, stack_b);
 }
 
 void	start_interactive_tester(t_stack *stack_a, t_stack *stack_b)

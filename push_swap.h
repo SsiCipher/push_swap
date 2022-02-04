@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:05:19 by yanab             #+#    #+#             */
-/*   Updated: 2022/02/04 01:32:25 by yanab            ###   ########.fr       */
+/*   Updated: 2022/02/04 02:45:21 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ int		*init_stack(t_stack **stack_top, int count, char **strs);
 
 // sort.c
 int		is_sorted(int length, int *arr);
+void	sort_stack(t_stack **stack_a, t_stack **stack_b);
 
 // test_utils.c
-void	print_stack(t_stack *stack_top, char stack_id);
+void	print_stacks(t_stack *stack_a, t_stack *stack_b);
 void	print_ops_count(void);
 void	start_interactive_tester(t_stack *stack_a, t_stack *stack_b);
 

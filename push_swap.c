@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:07:56 by yanab             #+#    #+#             */
-/*   Updated: 2022/02/04 01:38:17 by yanab            ###   ########.fr       */
+/*   Updated: 2022/02/04 02:52:41 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,14 @@ int	main(int argc, char **argv)
 	if (is_sorted(argc - 1, tmp_arr))
 		exit(0);
 
+	// print_stack(stack_a, 'a');
+	// sort_stack(&stack_a, &stack_b);
+	// print_stack(stack_a, 'a');
+
 	// ----- TESTING ONLY
 	printf("---------------- PushSwap ----------------\n\n");
 	print_ops_count();
-	print_stack(stack_a, 'a');
-	print_stack(stack_b, 'b');
+	print_stacks(stack_a, stack_b);
 	start_interactive_tester(stack_a, stack_b);
 	// ----- TESTING ONLY
 	return (0);
