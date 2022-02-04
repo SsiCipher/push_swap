@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 21:07:39 by yanab             #+#    #+#             */
-/*   Updated: 2021/12/29 21:32:11 by marvin           ###   ########.fr       */
+/*   Updated: 2022/02/04 01:34:45 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	print_stack(t_stack *stack_top, char stack_id)
 {
-	int	i;
+	// int	i;
 
-	i = 1;
+	// i = 1;
 	printf("Stack {%c}:\n", stack_id);
 	if (stack_top == NULL)
 		printf("\tStack is empty\n");
 	while (stack_top != NULL)
 	{
-		printf("\tNode [%d]: %d\n", i++, stack_top->content);
+		printf("\tNode [%d]: %d\n", stack_top->index, stack_top->content);
 		stack_top = stack_top -> next;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:23:42 by yanab             #+#    #+#             */
-/*   Updated: 2021/12/29 20:18:20 by marvin           ###   ########.fr       */
+/*   Updated: 2022/02/04 01:46:57 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 // Push node to stack top
 void	push_stack(t_stack **stack_top, t_stack *new_node)
 {
+	if (!*stack_top)
+		new_node->index = 1;
+	else
+		new_node->index = (*stack_top)->index + 1;
 	if (new_node)
 	{
 		new_node->next = *stack_top;
@@ -62,8 +66,13 @@ void	rotate_stack(t_stack **stack_top)
 		last = (*stack_top)->next;
 		(*stack_top)->next = NULL;
 		while (last->next)
+		{
+			last->index += 1;
 			last = last->next;
+		}
+		last->index += 1;
 		last->next = *stack_top;
+		last->next->index = 1;
 		*stack_top = tmp;
 	}
 }
@@ -79,10 +88,14 @@ void	rrotate_stack(t_stack **stack_top)
 	if (*stack_top != NULL && (*stack_top)->next != NULL)
 	{
 		while (last->next)
+		{
+			last->index -= 1;
 			last = last->next;
+		}
 		while (curr->next->next != NULL)
 			curr = curr->next;
 		last->next = *stack_top;
+		last->index = (*stack_top)->index + 1;
 		*stack_top = last;
 		curr->next = NULL;
 	}
