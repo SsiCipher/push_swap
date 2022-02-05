@@ -17,7 +17,7 @@ $(LIBS):
 	@echo "Done Creating > $@"
 
 $(NAME): $(SRCS)
-	$(CC) $(FLAGS) $(LIBS:%=libs/%.a) $(SRCS) -o $(NAME)
+	$(CC) $(FLAGS) $(SRCS) $(LIBS:%=libs/%.a) -o $(NAME)
 
 clean:
 	rm -rf $(NAME)

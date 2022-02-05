@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cipher <cipher@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 21:07:39 by yanab             #+#    #+#             */
-/*   Updated: 2022/02/04 02:52:35 by yanab            ###   ########.fr       */
+/*   Updated: 2022/02/04 20:09:58 by cipher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	print_stacks(t_stack *stack_a, t_stack *stack_b)
 {
-	char	a, b;
+	char	*a, *b;
 
 	printf("\ta\tb\n");
 	printf("\t-\t-\n");
 	while (stack_a != NULL || stack_b != NULL)
 	{
-		a = stack_a ? (stack_a->content + '0') : ' ';
-		b = stack_b ? (stack_b->content + '0') : ' ';
-		printf("\t%c\t%c\n", a, b);
+		a = stack_a ? ft_itoa(stack_a->content) : " ";
+		b = stack_b ? ft_itoa(stack_b->content) : " ";
+		printf("\t%s\t%s\n", a, b);
 		stack_a = stack_a ? stack_a->next : stack_a;
 		stack_b = stack_b ? stack_b->next : stack_b;
 	}
