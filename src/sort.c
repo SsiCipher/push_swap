@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cipher <cipher@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:04:33 by yanab             #+#    #+#             */
-/*   Updated: 2022/02/04 20:24:10 by cipher           ###   ########.fr       */
+/*   Updated: 2022/02/06 23:04:38 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ void	sort_5(t_stack **stack_a, t_stack **stack_b)
 			else
 				r(stack_a, 'a');
 		}
-		p(stack_b, pop_stack(stack_a), 'b');
+		p(stack_b, stack_pop(stack_a), 'b');
 	}
 	sort_3(stack_a);
 	while (*stack_b != NULL)
 	{
-		p(stack_a, pop_stack(stack_b), 'a');
+		p(stack_a, stack_pop(stack_b), 'a');
 		r(stack_a, 'a');
 	}
 }
@@ -95,9 +95,13 @@ void	sort_stack(t_stack **stack_a, t_stack **stack_b)
 {
 	int	stack_a_size;
 
+	(void)stack_b;
 	stack_a_size = (*stack_a)->index;
-	if (stack_a_size == 2 && (*stack_a)->content > (*stack_a)->next->content)
-		s(stack_a, 'a');
+	if (stack_a_size <= 2)
+	{
+		if ((*stack_a)->content > (*stack_a)->next->content)
+			s(stack_a, 'a');
+	}
 	else if (stack_a_size == 3)
 		sort_3(stack_a);
 	else if (stack_a_size <= 5)

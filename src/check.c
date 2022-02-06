@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 18:40:41 by yanab             #+#    #+#             */
-/*   Updated: 2022/02/06 18:52:35 by yanab            ###   ########.fr       */
+/*   Updated: 2022/02/06 23:52:50 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	atoi_check(char *nbr)
 	return (sign * num);
 }
 
-char	**alloc_args(int argc_count, const char **args_list, int *new_argc_count)
+char	**alloc_args(int count, const char **args, int *new_count)
 {
 	int		i;
 	int		parts;
@@ -59,19 +59,19 @@ char	**alloc_args(int argc_count, const char **args_list, int *new_argc_count)
 
 	i = -1;
 	parts = 0;
-	while (++i < argc_count)
+	while (++i < count)
 	{
-		if (ft_strchr(args_list[i], ' '))
-			parts += ft_countchr(args_list[i], ' ') + 1;
+		if (ft_strchr(args[i], ' '))
+			parts += ft_countchr((char *)args[i], ' ') + 1;
 		else
 			parts++;
 	}
 	strs = (char **)malloc(sizeof(char *) * (parts + 1));
-	*new_argc_count = parts;
+	*new_count = parts;
 	return (strs);
 }
 
-char	**parse_args(int argc_count, const char **args_list, int *new_argc_count)
+char	**parse_args(int count, const char **args, int *new_count)
 {
 	int		i;
 	int		j;
@@ -81,14 +81,14 @@ char	**parse_args(int argc_count, const char **args_list, int *new_argc_count)
 
 	i = -1;
 	j = 0;
-	strs = alloc_args(argc_count, args_list, new_argc_count);
-	while (++i < argc_count)
+	strs = alloc_args(count, args, new_count);
+	while (++i < count)
 	{
-		if (!ft_strchr(args_list[i], ' '))
-			strs[j++] = ft_strdup(args_list[i]);
+		if (!ft_strchr(args[i], ' '))
+			strs[j++] = ft_strdup(args[i]);
 		else
 		{
-			s = ft_split(args_list[i], ' ');
+			s = ft_split(args[i], ' ');
 			tmp = s;
 			while (*s)
 				strs[j++] = *(s++);
@@ -105,7 +105,6 @@ int	*init_stack(t_stack **stack_top, int count, char **strs)
 	t_stack	*new_node;
 	int		*tmp_arr;
 
-	strs = parse_args(count, (const char **)strs, &count);
 	if (!check_dup(count, strs))
 		print_err("Error: the arguments given contain duplicates\n");
 	tmp_arr = (int *)malloc(sizeof(int) * count);
@@ -120,7 +119,7 @@ int	*init_stack(t_stack **stack_top, int count, char **strs)
 		new_node->content = n;
 		new_node->next = NULL;
 		tmp_arr[count] = n;
-		push_stack(stack_top, new_node);
+		stack_push(stack_top, new_node);
 	}
 	return (tmp_arr);
 }

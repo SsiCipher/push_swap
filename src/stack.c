@@ -6,14 +6,14 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:23:42 by yanab             #+#    #+#             */
-/*   Updated: 2022/02/04 01:46:57 by yanab            ###   ########.fr       */
+/*   Updated: 2022/02/06 19:09:35 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
 // Push node to stack top
-void	push_stack(t_stack **stack_top, t_stack *new_node)
+void	stack_push(t_stack **stack_top, t_stack *new_node)
 {
 	if (!*stack_top)
 		new_node->index = 1;
@@ -27,7 +27,7 @@ void	push_stack(t_stack **stack_top, t_stack *new_node)
 }
 
 // Pop node from stack top
-t_stack	*pop_stack(t_stack **stack_top)
+t_stack	*stack_pop(t_stack **stack_top)
 {
 	t_stack	*tmp;
 
@@ -40,7 +40,7 @@ t_stack	*pop_stack(t_stack **stack_top)
 }
 
 // Swap the first 2 nodes in stack
-void	swap_stack(t_stack **stack_top)
+void	stack_swap(t_stack **stack_top)
 {
 	t_stack	*top;
 	int		tmp;
@@ -55,7 +55,7 @@ void	swap_stack(t_stack **stack_top)
 }
 
 // Rotate stack up by 1
-void	rotate_stack(t_stack **stack_top)
+void	stack_rotate(t_stack **stack_top)
 {
 	t_stack	*tmp;
 	t_stack	*last;
@@ -78,7 +78,7 @@ void	rotate_stack(t_stack **stack_top)
 }
 
 // Rotate stack down by 1
-void	rrotate_stack(t_stack **stack_top)
+void	stack_rrotate(t_stack **stack_top)
 {
 	t_stack	*last;
 	t_stack	*curr;

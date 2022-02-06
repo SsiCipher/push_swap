@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cipher <cipher@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 21:07:39 by yanab             #+#    #+#             */
-/*   Updated: 2022/02/04 20:09:58 by cipher           ###   ########.fr       */
+/*   Updated: 2022/02/06 19:29:30 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	print_stacks(t_stack *stack_a, t_stack *stack_b)
 {
 	char	*a, *b;
 
-	printf("\ta\tb\n");
-	printf("\t-\t-\n");
+	ft_putendl_fd("\ta\tb", 1);
+	ft_putendl_fd("\t-\t-\n", 1);
 	while (stack_a != NULL || stack_b != NULL)
 	{
 		a = stack_a ? ft_itoa(stack_a->content) : " ";
@@ -26,6 +26,7 @@ void	print_stacks(t_stack *stack_a, t_stack *stack_b)
 		stack_a = stack_a ? stack_a->next : stack_a;
 		stack_b = stack_b ? stack_b->next : stack_b;
 	}
+	ft_putendl_fd("------------------------------------------\n", 1);
 }
 
 void	print_ops_count(void)
@@ -65,13 +66,13 @@ void	start_interactive_tester(t_stack *stack_a, t_stack *stack_b)
 		else if (!strncmp(op, "pa", 2))
 		{
 			printf("\n");
-			p(&stack_a, pop_stack(&stack_b), 'a');
+			p(&stack_a, stack_pop(&stack_b), 'a');
 			print_info(stack_a, stack_b);
 		}
 		else if (!strncmp(op, "pb", 2))
 		{
 			printf("\n");
-			p(&stack_b, pop_stack(&stack_a), 'b');
+			p(&stack_b, stack_pop(&stack_a), 'b');
 			print_info(stack_a, stack_b);
 		}
 		else if (!strncmp(op, "ra", 2))
