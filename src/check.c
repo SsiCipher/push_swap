@@ -6,18 +6,11 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 18:40:41 by yanab             #+#    #+#             */
-/*   Updated: 2022/02/01 21:46:13 by yanab            ###   ########.fr       */
+/*   Updated: 2022/02/06 18:52:35 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
-void	print_err(char *error)
-{
-	while (*error)
-		write(2, error++, 1);
-	exit(1);
-}
 
 int	check_dup(int count, char **strs)
 {
@@ -58,12 +51,61 @@ int	atoi_check(char *nbr)
 	return (sign * num);
 }
 
+char	**alloc_args(int argc_count, const char **args_list, int *new_argc_count)
+{
+	int		i;
+	int		parts;
+	char	**strs;
+
+	i = -1;
+	parts = 0;
+	while (++i < argc_count)
+	{
+		if (ft_strchr(args_list[i], ' '))
+			parts += ft_countchr(args_list[i], ' ') + 1;
+		else
+			parts++;
+	}
+	strs = (char **)malloc(sizeof(char *) * (parts + 1));
+	*new_argc_count = parts;
+	return (strs);
+}
+
+char	**parse_args(int argc_count, const char **args_list, int *new_argc_count)
+{
+	int		i;
+	int		j;
+	char	**tmp;
+	char	**s;
+	char	**strs;
+
+	i = -1;
+	j = 0;
+	strs = alloc_args(argc_count, args_list, new_argc_count);
+	while (++i < argc_count)
+	{
+		if (!ft_strchr(args_list[i], ' '))
+			strs[j++] = ft_strdup(args_list[i]);
+		else
+		{
+			s = ft_split(args_list[i], ' ');
+			tmp = s;
+			while (*s)
+				strs[j++] = *(s++);
+			free(tmp);
+		}
+	}
+	strs[j] = NULL;
+	return (strs);
+}
+
 int	*init_stack(t_stack **stack_top, int count, char **strs)
 {
 	int		n;
 	t_stack	*new_node;
 	int		*tmp_arr;
 
+	strs = parse_args(count, (const char **)strs, &count);
 	if (!check_dup(count, strs))
 		print_err("Error: the arguments given contain duplicates\n");
 	tmp_arr = (int *)malloc(sizeof(int) * count);
