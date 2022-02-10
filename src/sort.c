@@ -6,65 +6,11 @@
 /*   By: cipher <cipher@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:04:33 by yanab             #+#    #+#             */
-/*   Updated: 2022/02/07 22:20:34 by cipher           ###   ########.fr       */
+/*   Updated: 2022/02/09 23:45:03 by cipher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
-int	get_stack_max(t_stack *stack_top, int *index, int *next_max)
-{
-	int	i;
-	int	max;
-
-	i = 0;
-	max = stack_top->content;
-	*next_max = stack_top->content;
-	while (stack_top != NULL)
-	{
-		if (stack_top->content > max)
-		{
-			*index = i;
-			*next_max = max;
-			max = stack_top->content;
-		}
-		else
-		{
-			if (stack_top->content > *next_max)
-				*next_max = stack_top->content;
-		}
-		i++;
-		stack_top = stack_top->next;
-	}
-	return (max);
-}
-
-int	get_stack_min(t_stack *stack_top, int *index, int *next_min)
-{
-	int	i;
-	int	min;
-
-	i = 0;
-	min = stack_top->content;
-	*next_min = stack_top->content;
-	while (stack_top != NULL)
-	{
-		if (stack_top->content < min)
-		{
-			*index = i;
-			*next_min = min;
-			min = stack_top->content;
-		}
-		else
-		{
-			if (stack_top->content < *next_min)
-				*next_min = stack_top->content;
-		}
-		i++;
-		stack_top = stack_top->next;
-	}
-	return (min);
-}
 
 void	sort_3(t_stack **stack_a)
 {
@@ -118,7 +64,7 @@ void	sort_5_min(t_stack **stack_a, t_stack **stack_b)
 	int	stack_a_min;
 	int	stack_a_next_min;
 	int	min_index;
-	int is_lt_5;
+	int	is_lt_5;
 
 	is_lt_5 = (*stack_a)->index < 5;
 	while ((*stack_a)->index > 3)
@@ -148,11 +94,17 @@ void	sort_5_min(t_stack **stack_a, t_stack **stack_b)
 		p(stack_a, stack_pop(stack_b), 'a');
 }
 
+void	sort_100(t_stack **stack_a, t_stack **stack_b)
+{
+	int stack_a_size;
+
+	stack_a_size = (*stack_a)->index;
+}
+
 void	sort_stack(t_stack **stack_a, t_stack **stack_b)
 {
 	int	stack_a_size;
 
-	(void)stack_b;
 	stack_a_size = (*stack_a)->index;
 	if (stack_a_size <= 2)
 	{
@@ -163,4 +115,6 @@ void	sort_stack(t_stack **stack_a, t_stack **stack_b)
 		sort_3(stack_a);
 	else if (stack_a_size <= 5)
 		sort_5_min(stack_a, stack_b);
+	else if (stack_a_size <= 100)
+		sort_100(stack_a, stack_b);
 }

@@ -1,9 +1,10 @@
-CC		=	gcc
+CC		=	cc
 NAME	=	push_swap
 FLAGS	=	-Wall -Wextra -Werror
 
-SRCS	=	src/stack.c src/operations.c src/sort.c src/check.c \
-			src/test_utils.c push_swap.c
+SRCS	=	src/stack.c src/stack_ops.c src/stack_utils.c \
+			src/args_check.c src/sort.c src/test_utils.c \
+			push_swap.c
 
 LIBS	=	libft
 

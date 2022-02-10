@@ -6,7 +6,7 @@
 /*   By: cipher <cipher@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:07:56 by yanab             #+#    #+#             */
-/*   Updated: 2022/02/07 22:17:56 by cipher           ###   ########.fr       */
+/*   Updated: 2022/02/09 22:23:39 by cipher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	main(int argc, char **argv)
 	tmp_arr = init_stack(&stack_a, args_count, args);
 	if (is_sorted(args_count, tmp_arr))
 		exit(0);
-
 	print_stacks(stack_a, stack_b);
 	sort_stack(&stack_a, &stack_b);
 	print_stacks(stack_a, stack_b);
