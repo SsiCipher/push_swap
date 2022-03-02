@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cipher <cipher@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:05:19 by yanab             #+#    #+#             */
-/*   Updated: 2022/02/09 23:46:45 by cipher           ###   ########.fr       */
+/*   Updated: 2022/02/28 06:16:36 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		check_dup(int count, char **strs);
 int		atoi_check(char *nbr);
 char	**alloc_args(int count, const char **args, int *new_count);
 char	**parse_args(int count, const char **args, int *new_count);
-int		*init_stack(t_stack **stack_top, int count, char **strs);
+void	init_stack(t_stack **stack_top, int count, char **strs);
 
 // sort.c
 void	sort_3(t_stack **stack_a);
@@ -66,5 +66,6 @@ void	start_interactive_tester(t_stack *stack_a, t_stack *stack_b);
 // push_swap.c
 void	print_err(char *error);
 int		is_sorted(int length, int *arr);
+int		is_stack_sorted(t_stack *stack_top);
 
 #endif

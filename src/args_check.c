@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   args_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cipher <cipher@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 18:40:41 by yanab             #+#    #+#             */
-/*   Updated: 2022/02/09 23:06:36 by cipher           ###   ########.fr       */
+/*   Updated: 2022/02/28 19:39:32 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
+// check if an array of strings contains duplicates
 int	check_dup(int count, char **strs)
 {
 	int	i;
@@ -28,6 +29,7 @@ int	check_dup(int count, char **strs)
 	return (1);
 }
 
+// ft_atoi + checking if the nbr contains any non-integer or is out of INT range
 int	atoi_check(char *nbr)
 {
 	int			i;
@@ -51,65 +53,40 @@ int	atoi_check(char *nbr)
 	return (sign * num);
 }
 
-char	**alloc_args(int count, const char **args, int *new_count)
-{
-	int		i;
-	int		parts;
-	char	**strs;
-
-	i = -1;
-	parts = 0;
-	while (++i < count)
-	{
-		if (ft_strchr(args[i], ' '))
-			parts += ft_countchr((char *)args[i], ' ') + 1;
-		else
-			parts++;
-	}
-	strs = (char **)malloc(sizeof(char *) * (parts + 1));
-	*new_count = parts;
-	return (strs);
-}
-
+// parses the new args from the current
 char	**parse_args(int count, const char **args, int *new_count)
 {
 	int		i;
-	int		j;
-	char	**tmp;
-	char	**s;
-	char	**strs;
+	char	*joined_args;
+	char	*temp;
+	char	**new_args;
 
+	joined_args = NULL;
 	i = -1;
-	j = 0;
-	strs = alloc_args(count, args, new_count);
 	while (++i < count)
 	{
-		if (!ft_strchr(args[i], ' '))
-			strs[j++] = ft_strdup(args[i]);
-		else
-		{
-			s = ft_split(args[i], ' ');
-			tmp = s;
-			while (*s)
-				strs[j++] = *(s++);
-			free(tmp);
-		}
+		temp = joined_args;
+		joined_args = ft_strjoin(joined_args, args[i]);
+		free(temp);
+		temp = joined_args;
+		joined_args = ft_strjoin(joined_args, " ");
+		free(temp);
 	}
-	strs[j] = NULL;
-	return (strs);
+	i = -1;
+	new_args = ft_split(joined_args, ' ');
+	while (new_args[++i])
+		*new_count += 1;
+	return (new_args);
 }
 
-int	*init_stack(t_stack **stack_top, int count, char **strs)
+// creates the initial stack
+void	init_stack(t_stack **stack_top, int count, char **strs)
 {
 	int		n;
 	t_stack	*new_node;
-	int		*tmp_arr;
 
 	if (!check_dup(count, strs))
 		print_err("Error: the arguments given contain duplicates\n");
-	tmp_arr = (int *)malloc(sizeof(int) * count);
-	if (!tmp_arr)
-		print_err("Error: failed to allocate memory\n");
 	while (count--)
 	{
 		n = atoi_check(strs[count]);
@@ -118,8 +95,6 @@ int	*init_stack(t_stack **stack_top, int count, char **strs)
 			print_err("Error: failed to allocate memory\n");
 		new_node->content = n;
 		new_node->next = NULL;
-		tmp_arr[count] = n;
 		stack_push(stack_top, new_node);
 	}
-	return (tmp_arr);
 }

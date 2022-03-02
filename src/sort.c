@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cipher <cipher@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:04:33 by yanab             #+#    #+#             */
-/*   Updated: 2022/02/09 23:45:03 by cipher           ###   ########.fr       */
+/*   Updated: 2022/02/28 06:16:23 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,8 @@ void	sort_5_min(t_stack **stack_a, t_stack **stack_b)
 	}
 	sort_3(stack_a);
 	if ((*stack_b)->index == 2)
-	{
 		if ((*stack_b)->content < (*stack_b)->next->content)
 			s(stack_b, 'b');
-	}
 	while (*stack_b != NULL)
 		p(stack_a, stack_pop(stack_b), 'a');
 }
@@ -98,6 +96,7 @@ void	sort_100(t_stack **stack_a, t_stack **stack_b)
 {
 	int stack_a_size;
 
+	(void)stack_b;
 	stack_a_size = (*stack_a)->index;
 }
 
