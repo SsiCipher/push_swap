@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cipher <cipher@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:23:42 by yanab             #+#    #+#             */
-/*   Updated: 2022/02/09 22:17:46 by cipher           ###   ########.fr       */
+/*   Updated: 2022/03/11 07:56:47 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	stack_push(t_stack **stack_top, t_stack *new_node)
 		new_node->index = 1;
 	else
 		new_node->index = (*stack_top)->index + 1;
+	new_node->order_index = -1;
 	if (new_node)
 	{
 		new_node->next = *stack_top;

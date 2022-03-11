@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:07:56 by yanab             #+#    #+#             */
-/*   Updated: 2022/02/28 06:14:51 by yanab            ###   ########.fr       */
+/*   Updated: 2022/03/11 08:46:29 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ int	main(int argc, char **argv)
 	init_stack(&stack_a, args_count, args);
 	if (is_stack_sorted(stack_a))
 		exit(0);
-	// print_stacks(stack_a, stack_b);
-	// sort_stack(&stack_a, &stack_b);
-	// print_stacks(stack_a, stack_b);
-	printf("---------------- PushSwap ----------------\n\n");
-	print_ops_count();
 	print_stacks(stack_a, stack_b);
-	start_interactive_tester(stack_a, stack_b);
+	sort_stack(&stack_a, &stack_b);
+	print_stacks(stack_a, stack_b);
+	// printf("---------------- PushSwap ----------------\n\n");
+	// print_ops_count();
+	// print_stacks(stack_a, stack_b);
+	// start_interactive_tester(stack_a, stack_b);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:05:19 by yanab             #+#    #+#             */
-/*   Updated: 2022/02/28 06:16:36 by yanab            ###   ########.fr       */
+/*   Updated: 2022/03/11 07:55:59 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 typedef struct s_stack
 {
 	int				index;
+	int				order_index;
 	int				content;
 	struct s_stack	*next;
 }	t_stack;

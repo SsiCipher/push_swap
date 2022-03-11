@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:04:33 by yanab             #+#    #+#             */
-/*   Updated: 2022/02/28 06:16:23 by yanab            ###   ########.fr       */
+/*   Updated: 2022/03/11 09:00:39 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,51 @@ void	sort_5_min(t_stack **stack_a, t_stack **stack_b)
 
 void	sort_100(t_stack **stack_a, t_stack **stack_b)
 {
-	int stack_a_size;
+	int	stack_a_size;
+	int	max_index;
+	int	next_max_index;
+	int	min_index;
+	int	next_min_index;
 
-	(void)stack_b;
-	stack_a_size = (*stack_a)->index;
+	int A = 100;
+	while (A--)
+	{
+		stack_a_size = (*stack_a)->index;
+		while ((*stack_a)->index > stack_a_size / 2)
+			p(stack_b, stack_pop(stack_a), 'b');
+		get_stack_max(*stack_b, &max_index, &next_max_index);
+		get_stack_min(*stack_b, &min_index, &next_min_index);
+
+		int N = stack_a_size / 2;
+		while (N--)
+		{
+			int i = 0;
+			if (ft_abs(min_index - (*stack_b)->index) > ft_abs(max_index - (*stack_b)->index))
+			{
+				while (i < ft_abs(max_index - (*stack_b)->index))
+				{
+					if (max_index < (*stack_b)->index / 2)
+						r(stack_b, 'b');
+					else
+						rr(stack_b, 'b');
+					i++;
+				}
+			}
+			else
+			{
+				
+				while (i < ft_abs(min_index - (*stack_b)->index))
+				{
+					if (min_index < (*stack_b)->index / 2)
+						r(stack_b, 'b');
+					else
+						rr(stack_b, 'b');
+					i++;
+				}
+			}
+			p(stack_a, stack_pop(stack_b), 'a');
+		}
+	}
 }
 
 void	sort_stack(t_stack **stack_a, t_stack **stack_b)

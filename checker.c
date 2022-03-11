@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:45:21 by yanab             #+#    #+#             */
-/*   Updated: 2022/03/02 02:51:28 by yanab            ###   ########.fr       */
+/*   Updated: 2022/03/11 08:46:10 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,6 @@ int	main(int argc, char **argv)
 			rr(&stack_a, 'a');
 			rr(&stack_b, 'b');
 		}
-		// if (!ft_strstr("pb\npb\nsa\nsb\nss\nra\nrb\nrr\nrra\nrrb\nrrr\n", op))
-		// 	print_err("Error: instruction doesn't exist and/or is incorrectly formatted\n");
-		// else
-		// {
-			
-		// }
 		op = get_next_line(0);
 	}
 	if (is_stack_sorted(stack_a))
