@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:05:19 by yanab             #+#    #+#             */
-/*   Updated: 2022/03/11 07:55:59 by yanab            ###   ########.fr       */
+/*   Updated: 2022/03/21 15:22:05 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,9 @@ void	r(t_stack **stack_top, char stack);
 void	rr(t_stack **stack_top, char stack);
 
 // args_check.c
+char	**parse_args(int count, const char **args, int *new_count);
 int		check_dup(int count, char **strs);
 int		atoi_check(char *nbr);
-char	**alloc_args(int count, const char **args, int *new_count);
-char	**parse_args(int count, const char **args, int *new_count);
 void	init_stack(t_stack **stack_top, int count, char **strs);
 
 // sort.c

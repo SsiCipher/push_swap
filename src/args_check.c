@@ -6,11 +6,37 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 18:40:41 by yanab             #+#    #+#             */
-/*   Updated: 2022/03/11 07:57:07 by yanab            ###   ########.fr       */
+/*   Updated: 2022/03/21 15:22:07 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
+
+// parses the new args from the current
+char	**parse_args(int count, const char **args, int *new_count)
+{
+	int		i;
+	char	*joined_args;
+	char	*temp;
+	char	**new_args;
+
+	joined_args = NULL;
+	i = -1;
+	while (++i < count)
+	{
+		temp = joined_args;
+		joined_args = ft_strjoin(joined_args, args[i]);
+		free(temp);
+		temp = joined_args;
+		joined_args = ft_strjoin(joined_args, " ");
+		free(temp);
+	}
+	i = -1;
+	new_args = ft_split(joined_args, ' ');
+	while (new_args[++i])
+		*new_count += 1;
+	return (new_args);
+}
 
 // check if an array of strings contains duplicates
 int	check_dup(int count, char **strs)
@@ -51,32 +77,6 @@ int	atoi_check(char *nbr)
 	if (sign * num <= INT_MIN || sign * num >= INT_MAX)
 		print_err("Error: the arguments given are out of integer range\n");
 	return (sign * num);
-}
-
-// parses the new args from the current
-char	**parse_args(int count, const char **args, int *new_count)
-{
-	int		i;
-	char	*joined_args;
-	char	*temp;
-	char	**new_args;
-
-	joined_args = NULL;
-	i = -1;
-	while (++i < count)
-	{
-		temp = joined_args;
-		joined_args = ft_strjoin(joined_args, args[i]);
-		free(temp);
-		temp = joined_args;
-		joined_args = ft_strjoin(joined_args, " ");
-		free(temp);
-	}
-	i = -1;
-	new_args = ft_split(joined_args, ' ');
-	while (new_args[++i])
-		*new_count += 1;
-	return (new_args);
 }
 
 // creates the initial stack
