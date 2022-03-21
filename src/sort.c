@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:04:33 by yanab             #+#    #+#             */
-/*   Updated: 2022/03/21 14:13:08 by yanab            ###   ########.fr       */
+/*   Updated: 2022/03/21 17:00:29 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,48 +95,25 @@ void	sort_5_min(t_stack **stack_a, t_stack **stack_b)
 void	sort_100(t_stack **stack_a, t_stack **stack_b)
 {
 	int	stack_a_size;
-	int	max_index;
-	int	next_max_index;
-	int	min_index;
-	int	next_min_index;
+	int	chunk_size;
+	int pushed = 0;
 
-	int A = 100;
-	while (A--)
+	stack_a_size = (*stack_a)->index;
+	if (stack_a_size < 50)
 	{
-		stack_a_size = (*stack_a)->index;
-		while ((*stack_a)->index > stack_a_size / 2)
-			p(stack_b, stack_pop(stack_a), 'b');
-		get_stack_max(*stack_b, &max_index, &next_max_index);
-		get_stack_min(*stack_b, &min_index, &next_min_index);
-
-		int N = stack_a_size / 2;
-		while (N--)
+		chunk_size = stack_a_size / 5;
+		for (int i = 1; i * chunk_size <= stack_a_size; i++)
 		{
-			int i = 0;
-			if (ft_abs(min_index - (*stack_b)->index) > ft_abs(max_index - (*stack_b)->index))
+			while (pushed < chunk_size * i)
 			{
-				while (i < ft_abs(max_index - (*stack_b)->index))
+				if ((*stack_a)->order_index < chunk_size * i)
 				{
-					if (max_index < (*stack_b)->index / 2)
-						r(stack_b, 'b');
-					else
-						rr(stack_b, 'b');
-					i++;
+					p(stack_b, stack_pop(stack_a), 'b');
+					pushed++;
 				}
+				else
+					r(stack_a, 'a');
 			}
-			else
-			{
-				
-				while (i < ft_abs(min_index - (*stack_b)->index))
-				{
-					if (min_index < (*stack_b)->index / 2)
-						r(stack_b, 'b');
-					else
-						rr(stack_b, 'b');
-					i++;
-				}
-			}
-			p(stack_a, stack_pop(stack_b), 'a');
 		}
 	}
 }

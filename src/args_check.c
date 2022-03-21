@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 18:40:41 by yanab             #+#    #+#             */
-/*   Updated: 2022/03/21 15:22:07 by yanab            ###   ########.fr       */
+/*   Updated: 2022/03/21 16:33:57 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,42 @@ void	init_stack(t_stack **stack_top, int count, char **strs)
 		new_node->content = n;
 		new_node->next = NULL;
 		stack_push(stack_top, new_node);
+	}
+}
+
+int cmp(int a, int b)
+{
+	return (a - b);
+}
+
+int get_index(int *arr, int size, int target)
+{
+	for (int i = 0; i < size; i++)
+	{
+		if (arr[i] == target)
+			return (i);
+	}
+	return (-1);
+}
+
+void index_stack(t_stack *stack_top, int stack_size)
+{
+	int *sorted_arr;
+
+	sorted_arr = malloc(sizeof(int) * stack_size);
+	int i = 0;
+	t_stack *curr = stack_top;
+	while (curr)
+	{
+		sorted_arr[i] = curr->content;
+		curr = curr->next;
+		i++;
+	}
+	ft_qsort(sorted_arr, stack_size, cmp);
+	curr = stack_top;
+	while (curr)
+	{
+		curr->order_index = get_index(sorted_arr, stack_size, curr->content);
+		curr = curr->next;
 	}
 }
