@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:07:56 by yanab             #+#    #+#             */
-/*   Updated: 2022/03/21 16:34:21 by yanab            ###   ########.fr       */
+/*   Updated: 2022/03/24 21:37:55 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,8 @@ int	main(int argc, char **argv)
 	if (is_stack_sorted(stack_a))
 		exit(0);
 	index_stack(stack_a, args_count);
-	// for (t_stack *curr = stack_a; curr; curr = curr->next)
-	// 	printf("oi: %d, content: %d\n", curr->order_index, curr->content);
-	print_stacks(stack_a, stack_b);
+
+	// print_stacks(stack_a, stack_b);
 	sort_stack(&stack_a, &stack_b);
 	print_stacks(stack_a, stack_b);
 	return (0);
