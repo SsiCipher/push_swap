@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:07:56 by yanab             #+#    #+#             */
-/*   Updated: 2022/03/27 18:36:37 by yanab            ###   ########.fr       */
+/*   Updated: 2022/03/28 08:22:06 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int argc, char **argv)
 		exit(0);
 	index_stack(stack_a, args_count);
 
-	// print_stacks(stack_a, stack_b);
+	print_stacks(stack_a, stack_b);
 	sort_stack(&stack_a, &stack_b);
 	print_stacks(stack_a, stack_b);
 	return (0);

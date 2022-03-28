@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:04:33 by yanab             #+#    #+#             */
-/*   Updated: 2022/03/28 07:19:48 by yanab            ###   ########.fr       */
+/*   Updated: 2022/03/28 08:20:46 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,7 @@ void	lift_to_top(t_stack **stack_b, int value, int index, int stack_size)
 	if (index == stack_size)
 		return ;
 	else if (index == stack_size - 1)
-	{
 		s(stack_b, 'b');
-	}
 	else
 	{
 		while ((*stack_b)->content != value)
@@ -127,41 +125,55 @@ int	get_max_index(t_stack *stack, int *max)
 	return (max_i);
 }
 
+int	get_min_index(t_stack *stack, int *min)
+{
+	*min = stack->content;
+	int min_i = stack->index;
+	for (t_stack *curr = stack; curr; curr = curr->next)
+	{
+		if (curr->content < *min)
+		{
+			*min = curr->content;
+			min_i = curr->index;
+		}
+	}
+	return (min_i);
+}
+
 void	sort_100(t_stack **stack_a, t_stack **stack_b)
 {
 	int	stack_a_size;
 	int	chunk_size;
-	int	pushed;
 	int	val;
 
-	pushed = 0;
 	stack_a_size = (*stack_a)->index;
 	chunk_size = stack_a_size / 10;
+
 	for (int i = 1; i * chunk_size <= stack_a_size; i++)
 	{
-		while (pushed < chunk_size * i)
+		for (int j = 0; j < i * chunk_size && *stack_a != NULL;)
 		{
 			if ((*stack_a)->order_index < chunk_size * i)
 			{
 				p(stack_b, stack_pop(stack_a), 'b');
-				pushed++;
+				j++;
 			}
 			else
 			{
-				int max_i = get_max_index(*stack_a, &val);
+				int max_i = get_min_index(*stack_a, &val);
 				lift_to_top(stack_a, val, max_i, (*stack_a)->index);
 				p(stack_b, stack_pop(stack_a), 'b');
 			}
 		}
 	}
 
-	// while (*stack_b != NULL)
-	// {
-	// 	int val;
-	// 	int max_i = get_max_index(*stack_b, &val);
-	// 	lift_to_top(stack_b, val, max_i, (*stack_b)->index);
-	// 	p(stack_a, stack_pop(stack_b), 'a');
-	// }
+	while (*stack_b != NULL)
+	{
+		int val;
+		int max_i = get_max_index(*stack_b, &val);
+		lift_to_top(stack_b, val, max_i, (*stack_b)->index);
+		p(stack_a, stack_pop(stack_b), 'a');
+	}
 }
 
 void	sort_stack(t_stack **stack_a, t_stack **stack_b)
