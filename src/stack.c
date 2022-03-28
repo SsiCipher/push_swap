@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 07:23:42 by yanab             #+#    #+#             */
-/*   Updated: 2022/03/21 15:26:03 by yanab            ###   ########.fr       */
+/*   Updated: 2022/03/27 18:58:42 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 // Push node to stack top
 void	stack_push(t_stack **stack_top, t_stack *new_node)
 {
+	if (!new_node)
+		return ;
 	if (!*stack_top)
 		new_node->index = 1;
 	else

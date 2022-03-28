@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:05:19 by yanab             #+#    #+#             */
-/*   Updated: 2022/03/21 16:22:53 by yanab            ###   ########.fr       */
+/*   Updated: 2022/03/27 18:35:23 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	start_interactive_tester(t_stack *stack_a, t_stack *stack_b);
 
 // push_swap.c
 void	print_err(char *error);
-int		is_sorted(int length, int *arr);
 int		is_stack_sorted(t_stack *stack_top);
 
 #endif

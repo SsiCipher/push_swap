@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:07:56 by yanab             #+#    #+#             */
-/*   Updated: 2022/03/24 21:37:55 by yanab            ###   ########.fr       */
+/*   Updated: 2022/03/27 18:36:37 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,6 @@ void	print_err(char *error)
 	while (*error)
 		write(2, error++, 1);
 	exit(1);
-}
-
-int	is_sorted(int length, int *arr)
-{
-	int	i;
-
-	i = 0;
-	while (++i < length)
-	{
-		if (arr[i] < arr[i - 1])
-			return (0);
-	}
-	return (1);
 }
 
 int	is_stack_sorted(t_stack *stack_top)
