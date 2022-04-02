@@ -6,57 +6,85 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:07:56 by yanab             #+#    #+#             */
-/*   Updated: 2022/03/28 08:24:30 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/02 05:28:55 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_err(char *error)
+void	print_error(char *error)
 {
-	while (*error)
-		write(2, error++, 1);
-	exit(1);
+	ft_putendl_fd(error, 2);
+	exit(EXIT_FAILURE);
 }
 
-int	is_stack_sorted(t_stack *stack_top)
+void	parse_args(int argc, char **argv, int *new_argc, char ***new_argv)
 {
-	t_stack *curr;
-	t_stack *next;
+	int		i;
+	char	*temp;
+	char	*joined_args;
 
-	curr = stack_top;
-	next = stack_top->next;
-	while (next != NULL)
+	i = -1;
+	joined_args = NULL;
+	while (++i < argc)
 	{
-		if (curr->content > next->content)
-			return (0);
-		curr = curr->next;
-		next = curr->next;
+		temp = joined_args;
+		joined_args = ft_strjoin(joined_args, argv[i]);
+		free(temp);
+		temp = joined_args;
+		joined_args = ft_strjoin(joined_args, " ");
+		free(temp);
 	}
-	return (1);
+	*new_argv = ft_split(joined_args, ' ');
+	free(joined_args);
+	i = -1;
+	while ((*new_argv)[++i])
+		*new_argc += 1;
 }
 
-int	main(int argc, char **argv)
+bool	contains_dups(int argc, char **argv)
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
-	char	**args;
-	int		args_count;
+	int	i;
 
-	stack_a = NULL;
-	stack_b = NULL;
-	if (argc <= 1)
-		print_err("Error: you have to provide a list of numbers\n");
-	args = parse_args(argc - 1, (const char **)argv + 1, &args_count);
-	if (args_count == 1)
-		exit(0);
-	init_stack(&stack_a, args_count, args);
-	if (is_stack_sorted(stack_a))
-		exit(0);
-	index_stack(stack_a, args_count);
+	while (--argc)
+	{
+		i = -1;
+		while (i < argc)
+		{
+			if (ft_strcmp(argv[argc], argv[i]) == 0)
+				return (TRUE);
+		}
+	}
+	return (FALSE);
+}
 
-	print_stacks(stack_a, stack_b);
-	sort_stack(&stack_a, &stack_b);
-	print_stacks(stack_a, stack_b);
+void	init_stack(t_node **stack_top, int argc, char **argv)
+{
+	int		i;
+	int		new_argc;
+	char	**new_argv;
+
+	(void)stack_top;
+	new_argc = 0;
+	new_argv = NULL;
+	parse_args(argc, argv, &new_argc, &new_argv);
+	if (contains_dups(new_argc, new_argv))
+		print_error("Error:\nThe arguments contain duplicates");
+	// check stack for duplicates
+	// check stack for non-integers
+	// check stack for out of INT range	
+}
+
+int main(int argc, char **argv)
+{
+	t_stack stack_a;
+	// t_stack stack_b;
+
+	// parse args & init stacks
+	init_stack(&(stack_a.stack_top), argc - 1, argv + 1);
+
+	// index stack
+	// sort stack
+
 	return (0);
 }

@@ -17,17 +17,14 @@ $(LIBS):
 	@echo "Done Creating > $@"
 
 $(NAME): $(SRCS) push_swap.c
-	$(CC) $(FLAGS) $(SRCS) $(LIBS:%=libs/%.a) -g push_swap.c -o $(NAME)
+	$(CC) $(FLAGS) $(SRCS) $(LIBS:%=libs/%.a) push_swap.c -o $(NAME)
 
 clean:
 	rm -rf $(NAME)
-	rm -rf checker
 
 fclean: clean
 	make -C libs/libft fclean
+	make -C libs/libgnl fclean
 	rm -rf libs/*.a
 
 re: fclean all
-
-bonus: all
-	$(CC) $(FLAGS) $(SRCS) $(LIBS:%=libs/%.a) checker.c -o checker

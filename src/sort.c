@@ -6,15 +6,15 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:04:33 by yanab             #+#    #+#             */
-/*   Updated: 2022/03/28 08:20:46 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/02 04:49:27 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	sort_3(t_stack **stack_a)
+void sort_3(t_stack **stack_a)
 {
-	int	arr[3];
+	int arr[3];
 
 	arr[0] = (*stack_a)->content;
 	arr[1] = (*stack_a)->next->content;
@@ -33,11 +33,11 @@ void	sort_3(t_stack **stack_a)
 	}
 }
 
-void	sort_5_max(t_stack **stack_a, t_stack **stack_b)
+void sort_5_max(t_stack **stack_a, t_stack **stack_b)
 {
-	int	stack_a_max;
-	int	stack_a_next_max;
-	int	max_index;
+	int stack_a_max;
+	int stack_a_next_max;
+	int max_index;
 
 	while ((*stack_a)->index > 3)
 	{
@@ -59,12 +59,12 @@ void	sort_5_max(t_stack **stack_a, t_stack **stack_b)
 	}
 }
 
-void	sort_5_min(t_stack **stack_a, t_stack **stack_b)
+void sort_5_min(t_stack **stack_a, t_stack **stack_b)
 {
-	int	stack_a_min;
-	int	stack_a_next_min;
-	int	min_index;
-	int	is_lt_5;
+	int stack_a_min;
+	int stack_a_next_min;
+	int min_index;
+	int is_lt_5;
 
 	is_lt_5 = (*stack_a)->index < 5;
 	while ((*stack_a)->index > 3)
@@ -92,10 +92,10 @@ void	sort_5_min(t_stack **stack_a, t_stack **stack_b)
 		p(stack_a, stack_pop(stack_b), 'a');
 }
 
-void	lift_to_top(t_stack **stack_b, int value, int index, int stack_size)
+void lift_to_top(t_stack **stack_b, int value, int index, int stack_size)
 {
 	if (index == stack_size)
-		return ;
+		return;
 	else if (index == stack_size - 1)
 		s(stack_b, 'b');
 	else
@@ -106,11 +106,11 @@ void	lift_to_top(t_stack **stack_b, int value, int index, int stack_size)
 				rr(stack_b, 'b');
 			else
 				r(stack_b, 'b');
-		}	
+		}
 	}
 }
 
-int	get_max_index(t_stack *stack, int *max)
+int get_max_index(t_stack *stack, int *max)
 {
 	*max = stack->content;
 	int max_i = stack->index;
@@ -125,7 +125,7 @@ int	get_max_index(t_stack *stack, int *max)
 	return (max_i);
 }
 
-int	get_min_index(t_stack *stack, int *min)
+int get_min_index(t_stack *stack, int *min)
 {
 	*min = stack->content;
 	int min_i = stack->index;
@@ -140,18 +140,19 @@ int	get_min_index(t_stack *stack, int *min)
 	return (min_i);
 }
 
-void	sort_100(t_stack **stack_a, t_stack **stack_b)
+void sort_100(t_stack **stack_a, t_stack **stack_b)
 {
-	int	stack_a_size;
-	int	chunk_size;
-	int	val;
+	int stack_a_size;
+	int chunk_size;
+	int val;
 
 	stack_a_size = (*stack_a)->index;
 	chunk_size = stack_a_size / 10;
 
 	for (int i = 1; i * chunk_size <= stack_a_size; i++)
 	{
-		for (int j = 0; j < i * chunk_size && *stack_a != NULL;)
+		int j = 0;
+		while (j < i * chunk_size && *stack_a != NULL)
 		{
 			if ((*stack_a)->order_index < chunk_size * i)
 			{
@@ -176,9 +177,9 @@ void	sort_100(t_stack **stack_a, t_stack **stack_b)
 	}
 }
 
-void	sort_stack(t_stack **stack_a, t_stack **stack_b)
+void sort_stack(t_stack **stack_a, t_stack **stack_b)
 {
-	int	stack_a_size;
+	int stack_a_size;
 
 	stack_a_size = (*stack_a)->index;
 	if (stack_a_size <= 2)
