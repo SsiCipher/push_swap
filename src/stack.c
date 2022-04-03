@@ -5,101 +5,85 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/05 07:23:42 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/02 05:42:20 by yanab            ###   ########.fr       */
+/*   Created: 2022/04/03 05:37:35 by yanab             #+#    #+#             */
+/*   Updated: 2022/04/03 05:39:37 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
-// Push node to stack top
-void	stack_push(t_stack **stack_top, t_stack *new_node)
+t_node	*create_node(int content)
 {
-	if (!new_node)
-		return ;
-	if (!*stack_top)
-		new_node->index = 1;
-	else
-		new_node->index = (*stack_top)->index + 1;
-	new_node->order_index = -1;
-	if (new_node)
-	{
-		new_node->next = *stack_top;
-		*stack_top = new_node;
-	}
+	t_node	*node;
+
+	node = malloc(sizeof(t_node));
+	if (!node)
+		return (NULL);
+	node->content = content;
+	node->next = NULL;
+	node->prev = NULL;
+	node->index = 0;
+	return (node);
 }
 
-// Pop node from stack top
-t_stack	*stack_pop(t_stack **stack_top)
+void	stack_push(t_stack *stack, t_node *new_node)
 {
-	t_stack	*tmp;
+	t_node	*last_node;
+	int		size;
 
-	if (!(*stack_top))
+	if (stack->stack_top == NULL)
+		stack->stack_top = new_node;
+	else
+	{
+		last_node = stack->stack_top;
+		size = stack->stack_size;
+		while (--size)
+			last_node = last_node->next;
+		new_node->next = stack->stack_top;
+		new_node->prev = last_node;
+		last_node->next = new_node;
+		stack->stack_top->prev = new_node;
+		stack->stack_top = new_node;
+	}
+	stack->stack_size += 1;
+}
+
+t_node	*stack_pop(t_stack *stack)
+{
+	t_node	*tmp;
+
+	if (stack->stack_size == 0)
 		return (NULL);
-	tmp = *stack_top;
-	*stack_top = (*stack_top)->next;
+	tmp = stack->stack_top;
+	if (stack->stack_size >= 2)
+	{
+		stack->stack_top->prev->next = stack->stack_top->next;
+		stack->stack_top->next->prev = stack->stack_top->prev;
+	}
+	stack->stack_top = stack->stack_top->next;
+	stack->stack_size -= 1;
 	tmp->next = NULL;
+	tmp->prev = NULL;
 	return (tmp);
 }
 
-// Swap the first 2 nodes in stack
-void	stack_swap(t_stack **stack_top)
+void	stack_swap(t_stack *stack)
 {
-	t_stack	*top;
-	int		tmp;
+	int	tmp;
 
-	top = *stack_top;
-	if (*stack_top != NULL && (*stack_top)->next != NULL)
-	{
-		tmp = (*stack_top)->content;
-		(*stack_top)->content = top->next->content;
-		top->next->content = tmp;
-	}
+	if (stack->stack_size <= 1)
+		return ;
+	tmp = stack->stack_top->content;
+	stack->stack_top->content = stack->stack_top->next->content;
+	stack->stack_top->next->content = tmp;
 }
 
-// Rotate stack up by 1
-void	stack_rotate(t_stack **stack_top)
+void	stack_rotate(t_stack *stack, int direction)
 {
-	t_stack	*tmp;
-	t_stack	*last;
-
-	if (*stack_top != NULL && (*stack_top)->next != NULL)
-	{
-		tmp = (*stack_top)->next;
-		last = (*stack_top)->next;
-		(*stack_top)->next = NULL;
-		while (last->next)
-		{
-			last->index += 1;
-			last = last->next;
-		}
-		last->index += 1;
-		last->next = *stack_top;
-		last->next->index = 1;
-		*stack_top = tmp;
-	}
-}
-
-// Rotate stack down by 1
-void	stack_rrotate(t_stack **stack_top)
-{
-	t_stack	*last;
-	t_stack	*curr;
-
-	curr = *stack_top;
-	last = *stack_top;
-	if (*stack_top != NULL && (*stack_top)->next != NULL)
-	{
-		while (last->next)
-		{
-			last->index -= 1;
-			last = last->next;
-		}
-		while (curr->next->next != NULL)
-			curr = curr->next;
-		last->next = *stack_top;
-		last->index = (*stack_top)->index + 1;
-		*stack_top = last;
-		curr->next = NULL;
-	}
+	if (stack->stack_size <= 1)
+		return ;
+	if (direction == 1)
+		stack->stack_top = stack->stack_top->next;
+	else if (direction == -1)
+		stack->stack_top = stack->stack_top->prev;
 }
