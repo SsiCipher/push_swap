@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 05:37:35 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/03 05:39:37 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/05 03:54:07 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,14 @@ void	stack_push(t_stack *stack, t_node *new_node)
 	t_node	*last_node;
 	int		size;
 
-	if (stack->stack_top == NULL)
+	if (!new_node)
+		return ;
+	if (stack->stack_size == 0)
 		stack->stack_top = new_node;
 	else
 	{
-		last_node = stack->stack_top;
 		size = stack->stack_size;
+		last_node = stack->stack_top;
 		while (--size)
 			last_node = last_node->next;
 		new_node->next = stack->stack_top;

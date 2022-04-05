@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 05:37:31 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/03 05:45:16 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/03 21:49:40 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	init_stack(t_stack *stack, int argc, char **argv)
 	char	**new_argv;
 	t_node	*new_node;
 
-	(void)stack;
 	new_argc = 0;
 	new_argv = NULL;
 	parse_args(argc, argv, &new_argc, &new_argv);
