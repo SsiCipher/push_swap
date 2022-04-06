@@ -6,58 +6,76 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:51:42 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/06 02:06:18 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/06 23:03:49 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_stack_sorted(t_stack *stack)
-{
-	int	start;
-	t_node *top = stack->stack_top;
-
-	start = 1;
-	while (stack->stack_top != top || start)
-	{
-		if (stack->stack_top > stack->stack_top->next)
-			return (0);
-		stack->stack_top = stack->stack_top->next;
-	}
-	return (1);
-}
-
-void	sort_3(t_stack *stack_a)
+void	sort_3(t_stack *stack)
 {
 	int	arr[3];
 
-	if (stack_a->stack_size <= 2)
+	if (stack->stack_size == 2)
 	{
-		if (stack_a->stack_top->content > stack_a->stack_top->next->content)
-			s(stack_a, TRUE, 'a');
+		if (stack->stack_top->content > stack->stack_top->next->content)
+			s(stack, TRUE, 'a');
 	}
 	else
 	{
-		arr[0] = stack_a->stack_top->content;
-		arr[1] = stack_a->stack_top->next->content;
-		arr[2] = stack_a->stack_top->next->next->content;
-		while (!is_stack_sorted(stack_a))
+		arr[0] = stack->stack_top->content;
+		arr[1] = stack->stack_top->next->content;
+		arr[2] = stack->stack_top->next->next->content;
+		while (!is_stack_sorted(*stack))
 		{
 			if (arr[0] > arr[1] && arr[0] > arr[2])
-				r(stack_a, TRUE, 'a');
+				r(stack, TRUE, 'a');
 			else if (arr[1] > arr[0] && arr[1] > arr[2])
-				rr(stack_a, TRUE, 'a');
+				rr(stack, TRUE, 'a');
 			else if (arr[0] > arr[1])
-				s(stack_a, TRUE, 'a');
-			arr[0] = stack_a->stack_top->content;
-			arr[1] = stack_a->stack_top->next->content;
-			arr[2] = stack_a->stack_top->next->next->content;
+				s(stack, TRUE, 'a');
+			arr[0] = stack->stack_top->content;
+			arr[1] = stack->stack_top->next->content;
+			arr[2] = stack->stack_top->next->next->content;
 		}
 	}
+}
+
+void	sort_5(t_stack *stack_a, t_stack *stack_b)
+{
+	int	min_index;
+	int	min_value;
+	int	next_min_value;
+
+	while (stack_a->stack_size > 3)
+	{
+		min_index = stack_min(*stack_a, &min_value, &next_min_value) + 1;
+		while (stack_a->stack_top->content != min_value)
+		{
+			if (stack_a->stack_top->content == next_min_value
+				&& stack_b->stack_size == 0)
+				p(stack_b, stack_a, TRUE, 'b');
+			else if (min_index <= stack_a->stack_size / 2)
+				r(stack_a, TRUE, 'a');
+			else
+				rr(stack_a, TRUE, 'a');
+		}
+		p(stack_b, stack_a, TRUE, 'b');
+	}
+	sort_3(stack_a);
+	if (stack_b->stack_size == 2)
+	{
+		if (stack_b->stack_top->content < stack_b->stack_top->next->content)
+			s(stack_b, TRUE, 'b');
+	}
+	while (stack_b->stack_size > 0)
+		p(stack_a, stack_b, TRUE, 'a');
 }
 
 void	sort_stacks(t_stack *stack_a, t_stack *stack_b)
 {
 	if (stack_a->stack_size <= 3)
 		sort_3(stack_a);
+	if (stack_a->stack_size <= 5)
+		sort_5(stack_a, stack_b);
 }

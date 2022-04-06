@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:07:56 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/06 05:29:30 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/06 23:03:43 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,6 @@ void	print_error(char *error)
 	exit(EXIT_FAILURE);
 }
 
-int	is_stack_sorted(t_stack stack)
-{
-	int		start;
-	t_node	*top;
-
-	start = 1;
-	top = stack.stack_top;
-	while (stack.stack_top != top || start)
-	{
-		if (stack.stack_top->content > stack.stack_top->next->content)
-			return (0);
-		stack.stack_top = stack.stack_top->next;
-		start = 0;
-	}
-	return (1);
-}
-
 int	main(int argc, char **argv)
 {
 	t_stack	stack_a;
@@ -43,10 +26,18 @@ int	main(int argc, char **argv)
 	stack_b.stack_size = 0;
 	stack_b.stack_top = NULL;
 	init_stack(&stack_a, argc - 1, argv + 1);
+	if (stack_a.stack_size == 1 || is_stack_sorted(stack_a))
+		exit(0);
 
-	print_stacks(stack_a, stack_b);
-	// sort_stacks(&stack_a, &stack_b);
-	printf("stack sorted: [%d]\n", is_stack_sorted(stack_a));
+	// print_stacks(stack_a, stack_b);
+	sort_stacks(&stack_a, &stack_b);
+	// print_stacks(stack_a, stack_b);
+
+	// int	min_index;
+	// int	min_value;
+	// int	next_min_value;
+	// min_index = stack_min(stack_a, &min_value, &next_min_value);
+	// printf("Min: [%d], Index: [%d], Next Min: [%d]\n", min_value, min_index, next_min_value);
 
 	return (0);
 }

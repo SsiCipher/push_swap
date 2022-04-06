@@ -194,3 +194,4 @@ void sort_stack(t_stack **stack_a, t_stack **stack_b)
 	else if (stack_a_size <= 100)
 		sort_100(stack_a, stack_b);
 }
+ß

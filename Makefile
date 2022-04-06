@@ -3,7 +3,7 @@ NAME	=	push_swap
 FLAGS	=	-Wall -Wextra -Werror
 
 SRCS	=	src/init_data.c src/operations.c src/stack.c \
-			src/stack_utils.c src/test_utils.c
+			src/stack_utils.c src/test_utils.c src/sort.c
 
 INCS	= -I .
 

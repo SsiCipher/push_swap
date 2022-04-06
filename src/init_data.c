@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 05:37:31 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/03 21:49:40 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/06 20:46:16 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ int	atoi_check(char *number)
 	while (number[i])
 	{
 		if (number[i] < '0' || number[i] > '9')
-			print_error("Error: the arguments contain a non integer");
+			print_error("Error:\nthe arguments contain a non integer");
 		num = num * 10 + (number[i++] - '0');
 	}
 	if (sign * num <= INT_MIN || sign * num >= INT_MAX)
-		print_error("Error: the arguments are out of integer range");
+		print_error("Error:\nthe arguments are out of integer range");
 	return (sign * num);
 }
 
