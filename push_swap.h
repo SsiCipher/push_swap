@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:05:19 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/05 03:37:12 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/05 23:30:54 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ typedef struct s_stack
 	int		stack_size;
 }	t_stack;
 
+// init_data.c
+void	parse_args(int argc, char **argv, int *new_argc, char ***new_argv);
+bool	contains_dups(int argc, char **argv);
+int		atoi_check(char *number);
+void	init_stack(t_stack *stack, int argc, char **argv);
+
 // stack.c
 t_node	*create_node(int content);
 void	stack_push(t_stack *stack, t_node *new_node);
@@ -52,15 +58,10 @@ void	p(t_stack *stack, t_stack *opp_stack, bool print_op, char stack_name);
 void	r(t_stack *stack, bool print_op, char stack_name);
 void	rr(t_stack *stack, bool print_op, char stack_name);
 
-// init_data.c
-void	parse_args(int argc, char **argv, int *new_argc, char ***new_argv);
-bool	contains_dups(int argc, char **argv);
-int		atoi_check(char *number);
-void	init_stack(t_stack *stack, int argc, char **argv);
-
 // test_utils.c
 void	print_ops_count(void);
 void	print_stacks(t_stack stack_a, t_stack stack_b);
+void	print_info(t_stack *stack_a, t_stack *stack_b);
 void	interactive_tester(t_stack *stack_a, t_stack *stack_b);
 
 // push_swap.c

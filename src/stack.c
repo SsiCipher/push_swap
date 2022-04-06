@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 05:37:35 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/05 03:54:07 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/06 01:50:24 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_node	*stack_pop(t_stack *stack)
 {
 	t_node	*tmp;
 
-	if (stack->stack_size == 0)
+	if (stack->stack_top == NULL)
 		return (NULL);
 	tmp = stack->stack_top;
 	if (stack->stack_size >= 2)
@@ -62,7 +62,10 @@ t_node	*stack_pop(t_stack *stack)
 		stack->stack_top->prev->next = stack->stack_top->next;
 		stack->stack_top->next->prev = stack->stack_top->prev;
 	}
-	stack->stack_top = stack->stack_top->next;
+	if (stack->stack_size == 1)
+		stack->stack_top = NULL;
+	else
+		stack->stack_top = stack->stack_top->next;
 	stack->stack_size -= 1;
 	tmp->next = NULL;
 	tmp->prev = NULL;

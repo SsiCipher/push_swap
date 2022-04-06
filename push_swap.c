@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:07:56 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/05 04:00:46 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/06 05:29:30 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,23 @@ void	print_error(char *error)
 	exit(EXIT_FAILURE);
 }
 
+int	is_stack_sorted(t_stack stack)
+{
+	int		start;
+	t_node	*top;
+
+	start = 1;
+	top = stack.stack_top;
+	while (stack.stack_top != top || start)
+	{
+		if (stack.stack_top->content > stack.stack_top->next->content)
+			return (0);
+		stack.stack_top = stack.stack_top->next;
+		start = 0;
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	stack_a;
@@ -27,23 +44,9 @@ int	main(int argc, char **argv)
 	stack_b.stack_top = NULL;
 	init_stack(&stack_a, argc - 1, argv + 1);
 
-	// t_node *curr = stack_a.stack_top;
-	// int size = stack_a.stack_size;
-	// while (curr && size--)
-	// {
-	// 	printf("item n'%d: [%d]\n", stack_a.stack_size - size, curr->content);
-	// 	curr = curr->next;
-	// }
-
-	printf("---------------- PushSwap ----------------\n");
-	// print_ops_count();
-	// p(&stack_b, &stack_a, TRUE, 'b');
 	print_stacks(stack_a, stack_b);
-	p(&stack_b, &stack_a, FALSE, 'b');
-	printf("%d\n", stack_b.stack_top->content);
-	print_stacks(stack_a, stack_b);
-
-	// interactive_tester(&stack_a, &stack_b);
+	// sort_stacks(&stack_a, &stack_b);
+	printf("stack sorted: [%d]\n", is_stack_sorted(stack_a));
 
 	return (0);
 }
