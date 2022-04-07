@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:51:42 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/06 23:03:49 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/06 23:08:10 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,18 @@ void	sort_5(t_stack *stack_a, t_stack *stack_b)
 		p(stack_a, stack_b, TRUE, 'a');
 }
 
+void	sort_100(t_stack *stack_a, t_stack *stack_b)
+{
+	(void)stack_a;
+	(void)stack_b;
+}
+
 void	sort_stacks(t_stack *stack_a, t_stack *stack_b)
 {
 	if (stack_a->stack_size <= 3)
 		sort_3(stack_a);
-	if (stack_a->stack_size <= 5)
+	else if (stack_a->stack_size <= 5)
 		sort_5(stack_a, stack_b);
+	else if (stack_a->stack_size <= 100)
+		sort_100(stack_a, stack_b);
 }
