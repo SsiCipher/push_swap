@@ -14,3 +14,13 @@ interactive_tester(&stack_a, &stack_b);
 // ----- TESTING ONLY
 
 ```
+
+```c
+
+int	min_index;
+int	min_value;
+int	next_min_value;
+min_index = stack_min(stack_a, &min_value, &next_min_value);
+printf("Min: [%d], Index: [%d], Next Min: [%d]\n", min_value, min_index, next_min_value);
+
+```

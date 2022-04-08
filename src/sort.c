@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:51:42 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/06 23:08:10 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/07 23:23:38 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	sort_5(t_stack *stack_a, t_stack *stack_b)
 
 	while (stack_a->stack_size > 3)
 	{
-		min_index = stack_min(*stack_a, &min_value, &next_min_value) + 1;
 		while (stack_a->stack_top->content != min_value)
 		{
+			min_index = stack_min(*stack_a, &min_value, &next_min_value) + 1;
 			if (stack_a->stack_top->content == next_min_value
 				&& stack_b->stack_size == 0)
 				p(stack_b, stack_a, TRUE, 'b');
@@ -74,8 +74,11 @@ void	sort_5(t_stack *stack_a, t_stack *stack_b)
 
 void	sort_100(t_stack *stack_a, t_stack *stack_b)
 {
+	int	chunk_size;
+
 	(void)stack_a;
 	(void)stack_b;
+	chunk_size = stack_a->stack_size / 5;
 }
 
 void	sort_stacks(t_stack *stack_a, t_stack *stack_b)

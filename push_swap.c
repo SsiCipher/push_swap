@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:07:56 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/07 05:40:29 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/07 23:05:21 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,11 @@ int	main(int argc, char **argv)
 	init_stack(&stack_a, argc - 1, argv + 1);
 	if (stack_a.stack_size == 1 || is_stack_sorted(stack_a))
 		exit(0);
+	index_stack(stack_a);
 
 	// print_stacks(stack_a, stack_b);
 	sort_stacks(&stack_a, &stack_b);
 	// print_stacks(stack_a, stack_b);
-
-	// int	min_index;
-	// int	min_value;
-	// int	next_min_value;
-	// min_index = stack_min(stack_a, &min_value, &next_min_value);
-	// printf("Min: [%d], Index: [%d], Next Min: [%d]\n", min_value, min_index, next_min_value);
 
 	return (0);
 }

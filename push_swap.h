@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:05:19 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/06 22:18:24 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/07 21:35:16 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	parse_args(int argc, char **argv, int *new_argc, char ***new_argv);
 bool	contains_dups(int argc, char **argv);
 int		atoi_check(char *number);
 void	init_stack(t_stack *stack, int argc, char **argv);
+void	index_stack(t_stack stack);
 
 // src/stack.c
 t_node	*create_node(int content);

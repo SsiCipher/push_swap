@@ -92,5 +92,6 @@ void	ft_swap(int *arr, int i, int j);
 int		ft_intlen(int n);
 void	ft_qsort(int *array, int size, int (*cmp)(int, int));
 int		ft_countchr(char *str, char c);
+int		ft_find(int length, int *array, int num);
 
 #endif
