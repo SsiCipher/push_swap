@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 05:37:31 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/07 22:00:32 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/12 02:56:26 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	init_stack(t_stack *stack, int argc, char **argv)
 	}
 }
 
-void	index_stack(t_stack stack)
+int	*index_stack(t_stack stack)
 {
 	int		i;
 	int		*stack_arr;
@@ -113,7 +113,7 @@ void	index_stack(t_stack stack)
 		stack_arr[i] = curr->content;
 		curr = curr->next;
 	}
-	ft_bsort(stack.stack_size, stack_arr, NULL);
+	ft_qsort(stack_arr, stack.stack_size, NULL);
 	i = -1;
 	curr = stack.stack_top;
 	while (++i < stack.stack_size)
@@ -121,4 +121,5 @@ void	index_stack(t_stack stack)
 		curr->index = ft_find(stack.stack_size, stack_arr, curr->content);
 		curr = curr->next;
 	}
+	return (stack_arr);
 }

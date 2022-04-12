@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 08:33:05 by cipher            #+#    #+#             */
-/*   Updated: 2022/02/05 20:53:11 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/12 02:53:24 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,17 @@ int	ft_sort_part(int *array, int size, int (*cmp)(int, int))
 	return (i - 1);
 }
 
+int	cmp_func(int a, int b)
+{
+	return (a - b);
+}
+
 void	ft_qsort(int *array, int size, int (*cmp)(int, int))
 {
 	int	pivot_i;
 
+	if (!cmp)
+		cmp = cmp_func;
 	if (size > 1)
 	{
 		pivot_i = ft_sort_part(array, size, cmp);

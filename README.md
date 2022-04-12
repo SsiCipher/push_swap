@@ -24,3 +24,16 @@ min_index = stack_min(stack_a, &min_value, &next_min_value);
 printf("Min: [%d], Index: [%d], Next Min: [%d]\n", min_value, min_index, next_min_value);
 
 ```
+
+```c
+
+int		i = 0;
+t_node	*curr = stack_a.stack_top;
+while (i < stack_a.stack_size)
+{
+	printf("Item %d: %d => %d\n", i, curr->content, curr->index);
+	curr = curr->next;
+	i++;
+}
+
+```

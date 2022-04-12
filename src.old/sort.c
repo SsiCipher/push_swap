@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:04:33 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/06 23:05:45 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/11 02:42:38 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,3 @@ void sort_stack(t_stack **stack_a, t_stack **stack_b)
 	else if (stack_a_size <= 100)
 		sort_100(stack_a, stack_b);
 }
-ß
