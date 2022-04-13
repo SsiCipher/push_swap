@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:05:19 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/11 08:11:10 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/13 01:59:51 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef struct s_node
 
 typedef struct s_stack
 {
-	t_node	*stack_top;
-	int		stack_size;
+	t_node	*top;
+	int		size;
 }	t_stack;
 
 // src/init_data.c

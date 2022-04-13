@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 05:37:31 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/12 02:56:26 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/13 01:59:49 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,19 +106,19 @@ int	*index_stack(t_stack stack)
 	t_node	*curr;
 
 	i = -1;
-	curr = stack.stack_top;
-	stack_arr = (int *)malloc(sizeof(int) * stack.stack_size);
-	while (++i < stack.stack_size)
+	curr = stack.top;
+	stack_arr = (int *)malloc(sizeof(int) * stack.size);
+	while (++i < stack.size)
 	{
 		stack_arr[i] = curr->content;
 		curr = curr->next;
 	}
-	ft_qsort(stack_arr, stack.stack_size, NULL);
+	ft_qsort(stack_arr, stack.size, NULL);
 	i = -1;
-	curr = stack.stack_top;
-	while (++i < stack.stack_size)
+	curr = stack.top;
+	while (++i < stack.size)
 	{
-		curr->index = ft_find(stack.stack_size, stack_arr, curr->content);
+		curr->index = ft_find(stack.size, stack_arr, curr->content);
 		curr = curr->next;
 	}
 	return (stack_arr);

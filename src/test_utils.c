@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 05:44:47 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/12 02:58:09 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/13 01:59:49 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,27 @@ void	print_stacks(t_stack stack_a, t_stack stack_b)
 	t_node	*a_top;
 	t_node	*b_top;
 
-	a_top = stack_a.stack_top;
-	b_top = stack_b.stack_top;
+	a_top = stack_a.top;
+	b_top = stack_b.top;
 	start = a_top != NULL;
-	printf("STACK A [%d]:", stack_a.stack_size);
-	while (stack_a.stack_top != a_top || start)
+	printf("STACK A [%d]:", stack_a.size);
+	while (stack_a.top != a_top || start)
 	{
-		printf("  [%d]", stack_a.stack_top->content);
-		stack_a.stack_top = stack_a.stack_top->next
-			? stack_a.stack_top->next
-			: stack_a.stack_top;
+		printf("  [%d]", stack_a.top->content);
+		stack_a.top = stack_a.top->next
+			? stack_a.top->next
+			: stack_a.top;
 		start = 0;
 	}
 	printf("\n");
-	printf("STACK B [%d]:", stack_b.stack_size);
+	printf("STACK B [%d]:", stack_b.size);
 	start = b_top != NULL;
-	while (stack_b.stack_top != b_top || start)
+	while (stack_b.top != b_top || start)
 	{
-		printf("  [%d]", stack_b.stack_top->content);
-		stack_b.stack_top = stack_b.stack_top->next
-			? stack_b.stack_top->next
-			: stack_b.stack_top;
+		printf("  [%d]", stack_b.top->content);
+		stack_b.top = stack_b.top->next
+			? stack_b.top->next
+			: stack_b.top;
 		start = 0;
 	}
 	printf("\n");
