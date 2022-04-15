@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 05:40:24 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/13 01:59:49 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/15 05:00:41 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,19 @@ int	stack_min(t_stack stack, int *min_value, int *next_min)
 		i++;
 	}
 	return (min_index);
+}
+
+int	get_index(t_stack stack, int value)
+{
+	int	i;
+
+	i = 0;
+	while (i < stack.size)
+	{
+		if (stack.top->content == value)
+			return (i);
+		stack.top = stack.top->next;
+		i++;
+	}
+	return (-1);
 }

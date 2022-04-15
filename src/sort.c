@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:51:42 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/13 05:57:50 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/15 05:36:38 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,11 @@ void	sort_5(t_stack *stack_a, t_stack *stack_b)
 		p(stack_a, stack_b, TRUE, 'a');
 }
 
-void	smart_rotate(t_stack *stack, int max)
+// < 700  : 5pts
+// < 900  : 4pts
+// < 1500 : 1pts
+
+void	smart_rotate(t_stack *stack, char stack_name, int min, int max)
 {
 	int		start;
 	int		end;
@@ -81,8 +85,8 @@ void	smart_rotate(t_stack *stack, int max)
 	curr = stack->top;
 	while (start < stack->size / 2)
 	{
-		if (curr->index < max)
-			break;
+		if (curr->index >= min && curr->index < max)
+			break ;
 		curr = curr->next;
 		start++;
 	}
@@ -90,62 +94,74 @@ void	smart_rotate(t_stack *stack, int max)
 	curr = stack->top->prev;
 	while (end < stack->size / 2)
 	{
-		if (curr->index < max)
-			break;
+		if (curr->index >= min && curr->index < max)
+			break ;
 		curr = curr->prev;
 		end++;
 	}
-	while (stack->top->index >= max)
+	while (stack->top->index < min || stack->top->index >= max)
 	{
 		if (start < end)
-			r(stack, TRUE, 'a');
+			r(stack, TRUE, stack_name);
 		else
-			rr(stack, TRUE, 'a');
+			rr(stack, TRUE, stack_name);
 	}
 }
 
-// 700: 5pts
-// 1500: 1pts
-
-void	sort_push_b(t_stack *stack_a, t_stack *stack_b)
+void	sort_push_b(t_stack *stack_a, t_stack *stack_b, int *ref_array)
 {
-	int rot_counter;
-	int max_value;
+	int	max_value;
+	int	max_value_index;
+	int	next_max_value;
 
 	while (stack_b->size > 0)
 	{
-		rot_counter = 0;
-
-		stack_max(*stack_b, &max_value);
-
+		max_value = ref_array[stack_b->size - 1];
+		max_value_index = get_index(*stack_b, max_value);
+		next_max_value = ref_array[stack_b->size - 2];
 		while (stack_b->top->content != max_value)
 		{
-			r(stack_b, TRUE, 'b');
-			rot_counter++;
+			if (stack_b->top->content == next_max_value)
+				p(stack_a, stack_b, TRUE, 'a');
+			else
+			{
+				if (max_value_index <= stack_b->size / 2)
+					r(stack_b, TRUE, 'b');
+				else
+					rr(stack_b, TRUE, 'b');
+			}
 		}
-		
 		p(stack_a, stack_b, TRUE, 'a');
-
-		while (rot_counter > 0)
+		if (stack_a->size >= 2)
 		{
-			rr(stack_b, TRUE, 'b');
-			rot_counter--;
+			if (stack_a->top->content > stack_a->top->next->content)
+				s(stack_a, TRUE, 'a');
 		}
 	}
 }
 
-void	sort_100(t_stack *stack_a, t_stack *stack_b)
+void	sort_100(t_stack *stack_a, t_stack *stack_b, int *ref_array)
 {
-	int	chunk_i = 1;
-	int	chunk_size = stack_a->size / 20;
-	int	size = stack_a->size;
+	int	chunk_i;
+	int	chunk_size;
+	int	size;
 	int	range_low;
 	int	range_high;
 
+	if (size <= 30)
+		chunk_size = size / 10;
+	else if (size <= 100)
+		chunk_size = size / 20;
+	else
+		chunk_size = size / 25;
+	size = stack_a->size;
+	chunk_i = 0;
 	while (stack_a->size > 0)
 	{
 		if (
-			size / 2 - chunk_size * chunk_i < 0 || size / 2 + chunk_size * chunk_i > size)
+			size / 2 - chunk_size * chunk_i < 0
+			|| size / 2 + chunk_size * chunk_i > size
+		)
 		{
 			range_low = 0;
 			range_high = size;
@@ -155,36 +171,31 @@ void	sort_100(t_stack *stack_a, t_stack *stack_b)
 			range_low = size / 2 - chunk_size * chunk_i;
 			range_high = size / 2 + chunk_size * chunk_i;
 		}
-
 		while (stack_b->size < range_high - range_low)
 		{
 			if (
-				stack_a->top->index >= range_low && stack_a->top->index < range_high)
+				stack_a->top->index >= range_low
+				&& stack_a->top->index < range_high
+			)
 			{
-				if (stack_a->top->index < size / 2)
-				{
-					p(stack_b, stack_a, TRUE, 'b');
+				p(stack_b, stack_a, TRUE, 'b');
+				if (stack_b->top->index < size / 2)
 					r(stack_b, TRUE, 'b');
-				}
-				else
-					p(stack_b, stack_a, TRUE, 'b');
 			}
 			else
-				r(stack_a, TRUE, 'a');
+				smart_rotate(stack_a, 'a', range_low, range_high);
 		}
-		
 		chunk_i += 1;
 	}
-
-	sort_push_b(stack_a, stack_b);
+	sort_push_b(stack_a, stack_b, ref_array);
 }
 
-void	sort_stacks(t_stack *stack_a, t_stack *stack_b)
+void	sort_stacks(t_stack *stack_a, t_stack *stack_b, int *ref_array)
 {
 	if (stack_a->size <= 3)
 		sort_3(stack_a);
 	else if (stack_a->size <= 5)
 		sort_5(stack_a, stack_b);
 	else if (stack_a->size <= 500)
-		sort_100(stack_a, stack_b);
+		sort_100(stack_a, stack_b, ref_array);
 }

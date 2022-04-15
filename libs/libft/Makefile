@@ -1,3 +1,4 @@
+CC = gcc
 NAME = libft.a
 FLAGS = -Wall -Wextra -Werror
 
@@ -27,7 +28,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 
 %.o: %.c libft.h
-	cc $(FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) -c $< -o $@
 	ar rcs $(NAME) $@
 
 clean:

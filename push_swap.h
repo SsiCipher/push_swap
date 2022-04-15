@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:05:19 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/13 01:59:51 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/15 05:00:36 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ void	rr(t_stack *stack, bool print_op, char stack_name);
 int		is_stack_sorted(t_stack stack);
 int		stack_max(t_stack stack, int *max_value);
 int		stack_min(t_stack stack, int *min_value, int *next_min);
+int		get_index(t_stack stack, int value);
 
 // src/sort.c
-void	sort_stacks(t_stack *stack_a, t_stack *stack_b);
+void	sort_stacks(t_stack *stack_a, t_stack *stack_b, int *ref_array);
 
 // src/test_utils.c
 void	print_ops_count(void);

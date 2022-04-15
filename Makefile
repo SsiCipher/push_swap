@@ -1,4 +1,4 @@
-CC		=	cc
+CC		=	gcc
 NAME	=	push_swap
 FLAGS	=	-Wall -Wextra -Werror
 
@@ -7,7 +7,7 @@ SRCS	=	src/init_data.c src/operations.c src/stack.c \
 
 INCS	= -I .
 
-LIBS	=	libft libgnl
+LIBS	=	libft
 
 all: libs $(NAME)
 
@@ -26,7 +26,6 @@ clean:
 
 fclean: clean
 	make -C libs/libft fclean
-	make -C libs/libgnl fclean
 	rm -rf libs/*.a
 
 re: fclean all
