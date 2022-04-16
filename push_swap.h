@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:05:19 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/15 05:00:36 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/16 05:55:15 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,12 @@ int		get_index(t_stack stack, int value);
 
 // src/sort.c
 void	sort_stacks(t_stack *stack_a, t_stack *stack_b, int *ref_array);
+
+// src/sort_utils.c
+void	smart_rotate(t_stack *stack, char stack_name, int min, int max);
+void	sort_push_b(t_stack *stack_a, t_stack *stack_b, int *ref_array);
+void	set_chunk_size(int size, int *chunk_size);
+void	expand_range(int size, int chunk_size, int *low, int *high);
 
 // src/test_utils.c
 void	print_ops_count(void);

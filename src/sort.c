@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:51:42 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/15 05:36:38 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/16 05:54:21 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,106 +71,19 @@ void	sort_5(t_stack *stack_a, t_stack *stack_b)
 		p(stack_a, stack_b, TRUE, 'a');
 }
 
-// < 700  : 5pts
-// < 900  : 4pts
-// < 1500 : 1pts
-
-void	smart_rotate(t_stack *stack, char stack_name, int min, int max)
+void	sort_long(t_stack *stack_a, t_stack *stack_b, int *ref_array)
 {
-	int		start;
-	int		end;
-	t_node	*curr;
-
-	start = 0;
-	curr = stack->top;
-	while (start < stack->size / 2)
-	{
-		if (curr->index >= min && curr->index < max)
-			break ;
-		curr = curr->next;
-		start++;
-	}
-	end = 0;
-	curr = stack->top->prev;
-	while (end < stack->size / 2)
-	{
-		if (curr->index >= min && curr->index < max)
-			break ;
-		curr = curr->prev;
-		end++;
-	}
-	while (stack->top->index < min || stack->top->index >= max)
-	{
-		if (start < end)
-			r(stack, TRUE, stack_name);
-		else
-			rr(stack, TRUE, stack_name);
-	}
-}
-
-void	sort_push_b(t_stack *stack_a, t_stack *stack_b, int *ref_array)
-{
-	int	max_value;
-	int	max_value_index;
-	int	next_max_value;
-
-	while (stack_b->size > 0)
-	{
-		max_value = ref_array[stack_b->size - 1];
-		max_value_index = get_index(*stack_b, max_value);
-		next_max_value = ref_array[stack_b->size - 2];
-		while (stack_b->top->content != max_value)
-		{
-			if (stack_b->top->content == next_max_value)
-				p(stack_a, stack_b, TRUE, 'a');
-			else
-			{
-				if (max_value_index <= stack_b->size / 2)
-					r(stack_b, TRUE, 'b');
-				else
-					rr(stack_b, TRUE, 'b');
-			}
-		}
-		p(stack_a, stack_b, TRUE, 'a');
-		if (stack_a->size >= 2)
-		{
-			if (stack_a->top->content > stack_a->top->next->content)
-				s(stack_a, TRUE, 'a');
-		}
-	}
-}
-
-void	sort_100(t_stack *stack_a, t_stack *stack_b, int *ref_array)
-{
-	int	chunk_i;
-	int	chunk_size;
 	int	size;
+	int	chunk_size;
 	int	range_low;
 	int	range_high;
 
-	if (size <= 30)
-		chunk_size = size / 10;
-	else if (size <= 100)
-		chunk_size = size / 20;
-	else
-		chunk_size = size / 25;
 	size = stack_a->size;
-	chunk_i = 0;
+	set_chunk_size(size, &chunk_size);
+	range_low = size / 2 - chunk_size;
+	range_high = size / 2 + chunk_size;
 	while (stack_a->size > 0)
 	{
-		if (
-			size / 2 - chunk_size * chunk_i < 0
-			|| size / 2 + chunk_size * chunk_i > size
-		)
-		{
-			range_low = 0;
-			range_high = size;
-		}
-		else
-		{
-			range_low = size / 2 - chunk_size * chunk_i;
-			range_high = size / 2 + chunk_size * chunk_i;
-		}
 		while (stack_b->size < range_high - range_low)
 		{
 			if (
@@ -185,7 +98,7 @@ void	sort_100(t_stack *stack_a, t_stack *stack_b, int *ref_array)
 			else
 				smart_rotate(stack_a, 'a', range_low, range_high);
 		}
-		chunk_i += 1;
+		expand_range(size, chunk_size, &range_low, &range_high);
 	}
 	sort_push_b(stack_a, stack_b, ref_array);
 }
@@ -197,5 +110,5 @@ void	sort_stacks(t_stack *stack_a, t_stack *stack_b, int *ref_array)
 	else if (stack_a->size <= 5)
 		sort_5(stack_a, stack_b);
 	else if (stack_a->size <= 500)
-		sort_100(stack_a, stack_b, ref_array);
+		sort_long(stack_a, stack_b, ref_array);
 }
