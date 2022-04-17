@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:51:42 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/16 05:56:24 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/17 05:47:07 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,41 @@ void	sort_5(t_stack *stack_a, t_stack *stack_b)
 	while (stack_b->size > 0)
 		p(stack_a, stack_b, TRUE, 'a');
 }
+
+void	smart_rotate(t_stack *stack, char stack_name, int min, int max)
+{
+	int		start;
+	int		end;
+	t_node	*curr;
+
+	start = 0;
+	curr = stack->top;
+	while (start < stack->size / 2)
+	{
+		if (curr->index >= min && curr->index < max)
+			break ;
+		curr = curr->next;
+		start++;
+	}
+	end = 0;
+	curr = stack->top->prev;
+	while (end < stack->size / 2)
+	{
+		if (curr->index >= min && curr->index < max)
+			break ;
+		curr = curr->prev;
+		end++;
+	}
+	while (stack->top->index < min || stack->top->index >= max)
+	{
+		if (start < end)
+			r(stack, TRUE, stack_name);
+		else
+			rr(stack, TRUE, stack_name);
+	}
+}
+
+// Add merge ops in A -> B
 
 void	sort_long(t_stack *stack_a, t_stack *stack_b, int *ref_array)
 {
