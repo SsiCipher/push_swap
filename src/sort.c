@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:51:42 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/17 05:47:07 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/18 04:25:32 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	sort_5(t_stack *stack_a, t_stack *stack_b)
 		p(stack_a, stack_b, TRUE, 'a');
 }
 
-void	smart_rotate(t_stack *stack, char stack_name, int min, int max)
+int	smart_rotate(t_stack *stack, int min, int max)
 {
 	int		start;
 	int		end;
@@ -95,24 +95,25 @@ void	smart_rotate(t_stack *stack, char stack_name, int min, int max)
 		curr = curr->prev;
 		end++;
 	}
-	while (stack->top->index < min || stack->top->index >= max)
-	{
-		if (start < end)
-			r(stack, TRUE, stack_name);
-		else
-			rr(stack, TRUE, stack_name);
-	}
+	return (start - end);
+	// while (stack->top->index < min || stack->top->index >= max)
+	// {
+	// 	if (start < end)
+	// 		r(stack, TRUE, stack_name);
+	// 	else
+	// 		rr(stack, TRUE, stack_name);
+	// }
 }
-
-// Add merge ops in A -> B
 
 void	sort_long(t_stack *stack_a, t_stack *stack_b, int *ref_array)
 {
-	int	size;
-	int	chunk_size;
-	int	range_low;
-	int	range_high;
+	int		size;
+	int		chunk_size;
+	int		range_low;
+	int		range_high;
+	char	*ops_str;
 
+	ops_str = NULL;
 	size = stack_a->size;
 	set_chunk_size(size, &chunk_size);
 	range_low = size / 2 - chunk_size;
@@ -126,15 +127,35 @@ void	sort_long(t_stack *stack_a, t_stack *stack_b, int *ref_array)
 				&& stack_a->top->index < range_high
 			)
 			{
-				p(stack_b, stack_a, TRUE, 'b');
+				p(stack_b, stack_a, FALSE, 'b');
+				concat_op(&ops_str, "pb\n");
 				if (stack_b->top->index < size / 2)
-					r(stack_b, TRUE, 'b');
+				{
+					r(stack_b, FALSE, 'b');
+					concat_op(&ops_str, "rb\n");
+				}
 			}
 			else
-				smart_rotate(stack_a, 'a', range_low, range_high);
+			{
+				int sr = smart_rotate(stack_a, range_low, range_high);
+				while (stack_a->top->index < range_low || stack_a->top->index >= range_high)
+				{
+					if (sr <= 0)
+					{
+						r(stack_a, FALSE, 'a');
+						concat_op(&ops_str, "ra\n");
+					}
+					else
+					{
+						rr(stack_a, FALSE, 'a');
+						concat_op(&ops_str, "rra\n");
+					}
+				}
+			}
 		}
 		expand_range(size, chunk_size, &range_low, &range_high);
 	}
+	print_merged_ops(ops_str);
 	sort_push_b(stack_a, stack_b, ref_array);
 }
 
