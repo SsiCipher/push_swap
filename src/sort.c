@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:51:42 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/18 04:25:32 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/18 05:19:46 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,18 +96,12 @@ int	smart_rotate(t_stack *stack, int min, int max)
 		end++;
 	}
 	return (start - end);
-	// while (stack->top->index < min || stack->top->index >= max)
-	// {
-	// 	if (start < end)
-	// 		r(stack, TRUE, stack_name);
-	// 	else
-	// 		rr(stack, TRUE, stack_name);
-	// }
 }
 
 void	sort_long(t_stack *stack_a, t_stack *stack_b, int *ref_array)
 {
 	int		size;
+	int		sr;
 	int		chunk_size;
 	int		range_low;
 	int		range_high;
@@ -137,8 +131,11 @@ void	sort_long(t_stack *stack_a, t_stack *stack_b, int *ref_array)
 			}
 			else
 			{
-				int sr = smart_rotate(stack_a, range_low, range_high);
-				while (stack_a->top->index < range_low || stack_a->top->index >= range_high)
+				sr = smart_rotate(stack_a, range_low, range_high);
+				while (
+					stack_a->top->index < range_low
+					|| stack_a->top->index >= range_high
+				)
 				{
 					if (sr <= 0)
 					{
