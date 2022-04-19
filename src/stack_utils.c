@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 05:40:24 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/15 05:00:41 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/19 01:07:05 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_stack_sorted(t_stack stack)
 {
-	int		size;
+	int	size;
 
 	size = stack.size;
 	while (--size)
@@ -85,4 +85,12 @@ int	get_index(t_stack stack, int value)
 		i++;
 	}
 	return (-1);
+}
+
+t_node	*get_stack_tail(t_stack stack)
+{
+	if (stack.size >= 2)
+		return (stack.top->prev);
+	else
+		return (stack.top);
 }

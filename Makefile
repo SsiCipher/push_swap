@@ -20,7 +20,7 @@ $(LIBS):
 	@echo "Done Creating > $@"
 
 $(NAME): $(SRCS) push_swap.c
-	$(CC) $(FLAGS) $(INCS) $(SRCS) $(LIBS:%=libs/%.a) push_swap.c -o $(NAME)
+	$(CC) $(FLAGS) $(INCS) $(SRCS) $(LIBS:%=libs/%.a) -g push_swap.c -o $(NAME)
 
 clean:
 	rm -rf $(NAME)
