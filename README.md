@@ -37,3 +37,39 @@ while (i < stack_a.stack_size)
 }
 
 ```
+
+```c
+
+void	sort_push_b(t_stack *stack_a, t_stack *stack_b, int *ref_array)
+{
+	int	max_value;
+	int	max_value_index;
+	int	next_max_value;
+
+	while (stack_b->size > 0)
+	{
+		max_value = ref_array[stack_b->size - 1];
+		max_value_index = get_index(*stack_b, max_value);
+		next_max_value = ref_array[stack_b->size - 2];
+		while (stack_b->top->content != max_value)
+		{
+			if (stack_b->top->content == next_max_value)
+				p(stack_a, stack_b, TRUE, 'a');
+			else
+			{
+				if (max_value_index <= stack_b->size / 2)
+					r(stack_b, TRUE, 'b');
+				else
+					rr(stack_b, TRUE, 'b');
+			}
+		}
+		p(stack_a, stack_b, TRUE, 'a');
+		if (stack_a->size >= 2)
+		{
+			if (stack_a->top->content > stack_a->top->next->content)
+				s(stack_a, TRUE, 'a');
+		}
+	}
+}
+
+```

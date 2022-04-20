@@ -6,15 +6,15 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:05:19 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/19 01:04:21 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/19 22:16:39 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <stdio.h>	// DELETE
-# include <string.h> // DELETE
+# include <stdio.h>
+# include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
@@ -51,7 +51,7 @@ void	stack_rotate(t_stack *stack, int direction);
 
 // src/operations.c
 void	s(t_stack *stack, bool print_op, char stack_name);
-void	p(t_stack *stack_to, t_stack *stack_from, bool print_op, char stack_name);
+void	p(t_stack *to, t_stack *from, bool print_op, char stack_name);
 void	r(t_stack *stack, bool print_op, char stack_name);
 void	rr(t_stack *stack, bool print_op, char stack_name);
 
@@ -60,7 +60,7 @@ int		is_stack_sorted(t_stack stack);
 int		stack_max(t_stack stack, int *max_value);
 int		stack_min(t_stack stack, int *min_value, int *next_min);
 int		get_index(t_stack stack, int value);
-t_node	*get_stack_tail(t_stack stack);
+t_node	*stack_tail(t_stack stack);
 
 // src/sort.c
 void	sort_stacks(t_stack *stack_a, t_stack *stack_b, int *ref_array);

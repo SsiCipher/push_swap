@@ -54,3 +54,4 @@ dkms.conf
 # Custom
 *.log
 push_swap
+.vscode

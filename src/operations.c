@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 05:37:33 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/19 01:04:10 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/19 22:07:08 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	s(t_stack *stack, bool print_op, char stack_name)
 	}
 }
 
-void	p(t_stack *stack_to, t_stack *stack_from, bool print_op, char stack_name)
+void	p(t_stack *to, t_stack *from, bool print_op, char stack_name)
 {
-	stack_push(stack_to, stack_pop(stack_from));
+	stack_push(to, stack_pop(from));
 	if (print_op)
 	{
 		write(1, "p", 1);

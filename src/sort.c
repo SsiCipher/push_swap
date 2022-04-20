@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:51:42 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/18 05:26:43 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/19 22:23:27 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ void	sort_5(t_stack *stack_a, t_stack *stack_b)
 
 	while (stack_a->size > 3)
 	{
+		min_index = stack_min(*stack_a, &min_value, &next_min_value);
 		while (stack_a->top->content != min_value)
 		{
-			min_index = stack_min(*stack_a, &min_value, &next_min_value) + 1;
+			min_index = stack_min(*stack_a, &min_value, &next_min_value);
 			if (stack_a->top->content == next_min_value && stack_b->size == 0)
 				p(stack_b, stack_a, TRUE, 'b');
 			else if (min_index <= stack_a->size / 2)

@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:07:56 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/18 05:18:08 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/19 22:20:19 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int	main(int argc, char **argv)
 	if (stack_a.size == 1 || is_stack_sorted(stack_a))
 		exit(0);
 	ref_array = index_stack(stack_a);
+
+	// print_stacks(stack_a, stack_a);
 	sort_stacks(&stack_a, &stack_b, ref_array);
+	// print_stacks(stack_a, stack_a);
+
 	return (0);
 }
