@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 05:37:31 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/13 01:59:49 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/21 23:52:08 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,9 @@ void	init_stack(t_stack *stack, int argc, char **argv)
 		if (!new_node)
 			print_error("Error:\nfailed to allocate memory");
 		stack_push(stack, new_node);
+		free(new_argv[new_argc]);
 	}
+	free(new_argv);
 }
 
 int	*index_stack(t_stack stack)

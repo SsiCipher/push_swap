@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:07:56 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/19 22:20:19 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/21 23:50:10 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,13 @@ int	main(int argc, char **argv)
 
 	stack_b.size = 0;
 	stack_b.top = NULL;
+	stack_b.name = 'b';
+	stack_a.name = 'a';
 	init_stack(&stack_a, argc - 1, argv + 1);
 	if (stack_a.size == 1 || is_stack_sorted(stack_a))
 		exit(0);
 	ref_array = index_stack(stack_a);
-
-	// print_stacks(stack_a, stack_a);
 	sort_stacks(&stack_a, &stack_b, ref_array);
-	// print_stacks(stack_a, stack_a);
-
+	free(ref_array);
 	return (0);
 }

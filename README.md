@@ -72,4 +72,30 @@ void	sort_push_b(t_stack *stack_a, t_stack *stack_b, int *ref_array)
 	}
 }
 
+// if (stack_b->top->content == ref_array[max_index])
+// {
+// 	p(stack_a, stack_b, TRUE, NULL);
+// 	max_index -= 1;
+// 	if (sort_2(stack_a, 1))
+// 		max_index -= 1;
+// }
+// else if (stack_b->top->content == ref_array[max_index - 1])
+// 	p(stack_a, stack_b, TRUE, NULL);
+// else
+// {
+// 	if (down_c == 0 && stack_b->top->content < stack_tail(*stack_a))
+// 	{
+// 		p(stack_a, stack_b, TRUE, NULL);
+// 		r(stack_a, TRUE, NULL);
+// 		down_c += 1;
+// 	}
+// 	else
+// 	{
+// 		if (max_stack_index <= stack_b->size / 2)
+// 			r(stack_b, TRUE, NULL);
+// 		else
+// 			rr(stack_b, TRUE, NULL);
+// 	}
+// }
+
 ```

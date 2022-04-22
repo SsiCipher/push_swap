@@ -55,3 +55,4 @@ dkms.conf
 *.log
 push_swap
 .vscode
+push_swap_tester

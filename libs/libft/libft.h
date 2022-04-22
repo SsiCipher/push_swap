@@ -93,5 +93,6 @@ int		ft_intlen(int n);
 void	ft_qsort(int *array, int size, int (*cmp)(int, int));
 int		ft_countchr(char *str, char c);
 int		ft_find(int length, int *array, int num);
+int		ft_inrange(int number, int min, int max);
 
 #endif

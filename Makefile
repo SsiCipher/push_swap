@@ -4,7 +4,7 @@ FLAGS	=	-Wall -Wextra -Werror
 
 SRCS	=	src/init_data.c src/operations.c src/stack.c \
 			src/stack_utils.c src/sort.c src/sort_utils.c \
-			src/test_utils.c
+			src/sort_utils2.c
 
 INCS	= -I .
 
