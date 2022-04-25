@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:07:56 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/21 23:50:10 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/25 00:50:41 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	main(int argc, char **argv)
 	t_stack	stack_b;
 	int		*ref_array;
 
+	if (argc <= 1)
+		exit(EXIT_FAILURE);
 	stack_b.size = 0;
 	stack_b.top = NULL;
 	stack_b.name = 'b';

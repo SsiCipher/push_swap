@@ -6,13 +6,13 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 05:37:31 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/21 23:52:08 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/24 00:16:29 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	parse_args(int argc, char **argv, int *new_argc, char ***new_argv)
+void	parse_args(int argc, char **argv, char ***new_argv)
 {
 	int		i;
 	char	*temp;
@@ -35,9 +35,6 @@ void	parse_args(int argc, char **argv, int *new_argc, char ***new_argv)
 	if (!(*new_argv))
 		print_error("Error:\nfailed to allocate memory");
 	free(joined_args);
-	i = -1;
-	while ((*new_argv)[++i])
-		*new_argc += 1;
 }
 
 bool	contains_dups(int argc, char **argv)
@@ -81,13 +78,19 @@ int	atoi_check(char *number)
 
 void	init_stack(t_stack *stack, int argc, char **argv)
 {
+	int		i;
 	int		new_argc;
 	char	**new_argv;
 	t_node	*new_node;
 
 	new_argc = 0;
 	new_argv = NULL;
-	parse_args(argc, argv, &new_argc, &new_argv);
+	parse_args(argc, argv, &new_argv);
+	i = -1;
+	while (new_argv[++i])
+		new_argc += 1;
+	if (new_argc == 0)
+		exit(EXIT_SUCCESS);
 	if (contains_dups(new_argc, new_argv))
 		print_error("Error:\nThe arguments contain duplicates");
 	while (new_argc--)

@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 05:54:07 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/22 00:02:22 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/24 00:26:43 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,32 @@ void	concat_op(char **ops_str, char *new_op)
 	free(tmp);
 }
 
+int	merge_ops(char **ops, int i)
+{
+	if (
+		(!ft_strcmp(ops[i], "rb") && !ft_strcmp(ops[i + 1], "ra"))
+		|| (!ft_strcmp(ops[i], "ra") && !ft_strcmp(ops[i + 1], "rb")))
+	{
+		write(1, "rr\n", 3);
+		return (1);
+	}
+	else if (
+		(!ft_strcmp(ops[i], "sb") && !ft_strcmp(ops[i + 1], "sa"))
+		|| (!ft_strcmp(ops[i], "sa") && !ft_strcmp(ops[i + 1], "sb")))
+	{
+		write(1, "ss\n", 3);
+		return (1);
+	}
+	else if (
+		(!ft_strcmp(ops[i], "rrb") && !ft_strcmp(ops[i + 1], "rra"))
+		|| (!ft_strcmp(ops[i], "rra") && !ft_strcmp(ops[i + 1], "rrb")))
+	{
+		write(1, "rrr\n", 4);
+		return (1);
+	}
+	return (0);
+}
+
 void	print_merged_ops(char *ops_str)
 {
 	int		i;
@@ -40,11 +66,8 @@ void	print_merged_ops(char *ops_str)
 	ops = ft_split(ops_str, '\n');
 	while (ops[i])
 	{
-		if (
-			(!ft_strcmp(ops[i], "rb") && !ft_strcmp(ops[i + 1], "ra"))
-			|| (!ft_strcmp(ops[i], "ra") && !ft_strcmp(ops[i + 1], "rb")))
+		if (merge_ops(ops, i))
 		{
-			write(1, "rr\n", 3);
 			free(ops[i]);
 			free(ops[i + 1]);
 			i += 2;
@@ -70,31 +93,4 @@ void	expand_range(int size, int chunk_size, int *low, int *high)
 		*high = size;
 	else
 		*high += chunk_size;
-}
-
-int	smart_rotate(t_stack *stack, int min, int max)
-{
-	int		start;
-	int		end;
-	t_node	*curr;
-
-	start = 0;
-	curr = stack->top;
-	while (start < stack->size / 2)
-	{
-		if (curr->index >= min && curr->index < max)
-			break ;
-		curr = curr->next;
-		start++;
-	}
-	end = 0;
-	curr = stack->top->prev;
-	while (end < stack->size / 2)
-	{
-		if (curr->index >= min && curr->index < max)
-			break ;
-		curr = curr->prev;
-		end++;
-	}
-	return (start - end);
 }

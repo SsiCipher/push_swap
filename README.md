@@ -72,29 +72,85 @@ void	sort_push_b(t_stack *stack_a, t_stack *stack_b, int *ref_array)
 	}
 }
 
-// if (stack_b->top->content == ref_array[max_index])
+if (stack_b->top->content == ref_array[max_index])
+{
+	p(stack_a, stack_b, TRUE, NULL);
+	max_index -= 1;
+	if (sort_2(stack_a, 1))
+		max_index -= 1;
+}
+else if (stack_b->top->content == ref_array[max_index - 1])
+	p(stack_a, stack_b, TRUE, NULL);
+else
+{
+	if (down_c == 0 && stack_b->top->content < stack_tail(*stack_a))
+	{
+		p(stack_a, stack_b, TRUE, NULL);
+		r(stack_a, TRUE, NULL);
+		down_c += 1;
+	}
+	else
+	{
+		if (max_stack_index <= stack_b->size / 2)
+			r(stack_b, TRUE, NULL);
+		else
+			rr(stack_b, TRUE, NULL);
+	}
+}
+
+int	smart_rotate(t_stack *stack, int min, int max)
+{
+	int		start;
+	int		end;
+	t_node	*curr;
+
+	start = 0;
+	curr = stack->top;
+	while (start < stack->size / 2)
+	{
+		if (curr->index >= min && curr->index < max)
+			break ;
+		curr = curr->next;
+		start++;
+	}
+	end = 0;
+	curr = stack->top->prev;
+	while (end < stack->size / 2)
+	{
+		if (curr->index >= min && curr->index < max)
+			break ;
+		curr = curr->prev;
+		end++;
+	}
+	return (start - end);
+}
+
+// void	push_to_a(t_stack *stacks[2], int *ref, int *max_index, int *down_c, char **ops)
 // {
-// 	p(stack_a, stack_b, TRUE, NULL);
-// 	max_index -= 1;
-// 	if (sort_2(stack_a, 1))
-// 		max_index -= 1;
-// }
-// else if (stack_b->top->content == ref_array[max_index - 1])
-// 	p(stack_a, stack_b, TRUE, NULL);
-// else
-// {
-// 	if (down_c == 0 && stack_b->top->content < stack_tail(*stack_a))
+// 	int	max_stack_index;
+
+// 	max_stack_index = get_index(*stacks[1], ref[*max_index]);
+// 	if (max_stack_index == -1)
 // 	{
-// 		p(stack_a, stack_b, TRUE, NULL);
-// 		r(stack_a, TRUE, NULL);
-// 		down_c += 1;
+// 		rr(stacks[0], FALSE, ops);
+// 		*down_c -= 1;
+// 		*max_index -= 1;
 // 	}
-// 	else
+// 	else if (!push_max(stacks, ref, max_index, ops))
 // 	{
-// 		if (max_stack_index <= stack_b->size / 2)
-// 			r(stack_b, TRUE, NULL);
+// 		if (*down_c == 0 && stacks[1]->top->content < stack_tail(*stacks[0]))
+// 		{
+// 			p(stacks[0], stacks[1], FALSE, ops);
+// 			r(stacks[0], FALSE, ops);
+// 			*down_c += 1;
+// 		}
 // 		else
-// 			rr(stack_b, TRUE, NULL);
+// 		{
+// 			if (max_stack_index <= stacks[1]->size / 2)
+// 				r(stacks[1], FALSE, ops);
+// 			else
+// 				rr(stacks[1], FALSE, ops);
+// 		}
 // 	}
 // }
 

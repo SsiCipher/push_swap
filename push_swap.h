@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 19:05:19 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/22 01:23:31 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/25 01:06:54 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,15 @@ typedef struct s_stack
 	char	name;
 }	t_stack;
 
+typedef struct s_vars
+{
+	char	*ops_str;
+	int		down_c;
+	int		max_index;
+}	t_vars;
+
 // src/init_data.c
-void	parse_args(int argc, char **argv, int *new_argc, char ***new_argv);
+void	parse_args(int argc, char **argv, char ***new_argv);
 bool	contains_dups(int argc, char **argv);
 int		atoi_check(char *number);
 void	init_stack(t_stack *stack, int argc, char **argv);
@@ -64,7 +71,7 @@ void	r(t_stack *stack, bool print_op, char **ops_str);
 void	rr(t_stack *stack, bool print_op, char **ops_str);
 
 // src/sort.c
-int		sort_2(t_stack *stack, int direction);
+int		sort_2(t_stack *stack, int direction, char **ops);
 void	sort_3(t_stack *stack);
 void	sort_5(t_stack *stack_a, t_stack *stack_b);
 void	sort_long(t_stack *stack_a, t_stack *stack_b, int *ref_array);
@@ -73,9 +80,9 @@ void	sort_stacks(t_stack *stack_a, t_stack *stack_b, int *ref_array);
 // src/sort_utils.c
 void	set_chunk_size(int size, int *chunk_size);
 void	concat_op(char **ops_str, char *new_op);
+int		merge_ops(char **ops, int i);
 void	print_merged_ops(char *ops_str);
 void	expand_range(int size, int chunk_size, int *low, int *high);
-int		smart_rotate(t_stack *stack, int min, int max);
 
 // src/sort_utils2.c
 void	a_to_b(t_stack *stack_a, t_stack *stack_b, int range[2], char **ops);

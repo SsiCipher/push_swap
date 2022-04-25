@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 00:06:04 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/23 00:49:40 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/25 01:08:47 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,67 +26,68 @@ void	a_to_b(t_stack *stack_a, t_stack *stack_b, int range[2], char **ops)
 	else
 	{
 		while (!ft_inrange(stack_a->top->index, range[0], range[1]))
-		{
-			if (smart_rotate(stack_a, range[0], range[1]) <= 0)
-				r(stack_a, FALSE, ops);
-			else
-				rr(stack_a, FALSE, ops);
-		}
+			r(stack_a, FALSE, ops);
 	}
 }
 
-void	push_(t_stack *stacks[2], int *ref, int *max_index, int *down_c)
+int	push_max(t_stack *stack_a, t_stack *stack_b, int *ref, t_vars *vars)
 {
-	if (stacks[1]->top->content == ref[*max_index])
+	if (stack_b->top->content == ref[vars->max_index])
 	{
-		p(stacks[0], stacks[1], TRUE, NULL);
-		*max_index -= 1;
-		if (sort_2(stacks[0], 1))
-			*max_index -= 1;
+		p(stack_a, stack_b, FALSE, &(vars->ops_str));
+		vars->max_index -= 1;
+		if (sort_2(stack_a, 1, &(vars->ops_str)))
+			vars->max_index -= 1;
+		return (1);
 	}
-	else if (stacks[1]->top->content == ref[*max_index - 1])
-		p(stacks[0], stacks[1], TRUE, NULL);
-	else
+	else if (stack_b->top->content == ref[vars->max_index - 1])
 	{
-		if (*down_c == 0 && stacks[1]->top->content < stack_tail(*stacks[0]))
+		p(stack_a, stack_b, FALSE, &(vars->ops_str));
+		return (1);
+	}
+	return (0);
+}
+
+void	push_to_a(t_stack *stack_a, t_stack *stack_b, int *ref, t_vars *vars)
+{
+	int	max_stack_index;
+
+	max_stack_index = get_index(*stack_b, ref[vars->max_index]);
+	if (max_stack_index == -1)
+	{
+		rr(stack_a, FALSE, &(vars->ops_str));
+		vars->down_c -= 1;
+		vars->max_index -= 1;
+	}
+	else if (!push_max(stack_a, stack_b, ref, vars))
+	{
+		if (vars->down_c == 0 && stack_b->top->content < stack_tail(*stack_a))
 		{
-			p(stacks[0], stacks[1], TRUE, NULL);
-			r(stacks[0], TRUE, NULL);
-			*down_c += 1;
+			p(stack_a, stack_b, FALSE, &(vars->ops_str));
+			r(stack_a, FALSE, &(vars->ops_str));
+			vars->down_c += 1;
 		}
 		else
 		{
-			if (get_index(*stacks[1], ref[*max_index]) <= stacks[1]->size / 2)
-				r(stacks[1], TRUE, NULL);
+			if (max_stack_index <= stack_b->size / 2)
+				r(stack_b, FALSE, &(vars->ops_str));
 			else
-				rr(stacks[1], TRUE, NULL);
+				rr(stack_b, FALSE, &(vars->ops_str));
 		}
 	}
 }
 
 void	b_to_a(t_stack *stack_a, t_stack *stack_b, int *ref_array)
 {
-	int		down_c;
-	int		max_index;
-	int		max_stack_index;
-	t_stack	*stacks[2];
+	t_vars	vars;
 
-	down_c = 0;
-	max_index = stack_b->size - 1;
-	stacks[0] = stack_a;
-	stacks[1] = stack_b;
+	vars.down_c = 0;
+	vars.max_index = stack_b->size - 1;
+	vars.ops_str = NULL;
 	while (stack_b->size > 0)
-	{
-		max_stack_index = get_index(*stack_b, ref_array[max_index]);
-		if (max_stack_index == -1)
-		{
-			rr(stack_a, TRUE, NULL);
-			down_c -= 1;
-			max_index -= 1;
-		}
-		else
-			push_(stacks, ref_array, &max_index, &down_c);
-	}
-	while (down_c-- > 0)
-		rr(stack_a, TRUE, NULL);
+		push_to_a(stack_a, stack_b, ref_array, &vars);
+	while ((vars.down_c)-- > 0)
+		rr(stack_a, FALSE, &(vars.ops_str));
+	print_merged_ops(vars.ops_str);
+	free(vars.ops_str);
 }

@@ -6,13 +6,13 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:51:42 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/22 00:02:48 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/24 01:10:18 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	sort_2(t_stack *stack, int direction)
+int	sort_2(t_stack *stack, int direction, char **ops)
 {
 	if (direction > 0)
 	{
@@ -20,7 +20,7 @@ int	sort_2(t_stack *stack, int direction)
 		{
 			if (stack->top->content > stack->top->next->content)
 			{
-				s(stack, TRUE, NULL);
+				s(stack, ops == NULL, ops);
 				return (1);
 			}
 		}
@@ -31,7 +31,7 @@ int	sort_2(t_stack *stack, int direction)
 		{
 			if (stack->top->content < stack->top->next->content)
 			{
-				s(stack, TRUE, NULL);
+				s(stack, ops == NULL, ops);
 				return (1);
 			}
 		}
@@ -44,7 +44,7 @@ void	sort_3(t_stack *stack)
 	int	arr[3];
 
 	if (stack->size == 2)
-		sort_2(stack, 1);
+		sort_2(stack, 1, NULL);
 	else
 	{
 		arr[0] = stack->top->content;
@@ -87,7 +87,7 @@ void	sort_5(t_stack *stack_a, t_stack *stack_b)
 		p(stack_b, stack_a, TRUE, NULL);
 	}
 	sort_3(stack_a);
-	sort_2(stack_b, -1);
+	sort_2(stack_b, -1, NULL);
 	while (stack_b->size > 0)
 		p(stack_a, stack_b, TRUE, NULL);
 }
