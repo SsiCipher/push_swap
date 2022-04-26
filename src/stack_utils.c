@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 05:40:24 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/23 22:50:40 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/26 01:58:31 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	is_stack_sorted(t_stack stack)
 	t_node	*curr;
 
 	size = stack.size;
+	if (size == 0)
+		return (1);
 	curr = stack.top;
 	while (--size)
 	{

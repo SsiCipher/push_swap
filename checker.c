@@ -6,7 +6,7 @@
 /*   By: yanab <yanab@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 21:07:56 by yanab             #+#    #+#             */
-/*   Updated: 2022/04/23 23:28:51 by yanab            ###   ########.fr       */
+/*   Updated: 2022/04/26 01:58:07 by yanab            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	main(int argc, char **argv)
 		exit(EXIT_SUCCESS);
 	ref_array = index_stack(stack_a);
 	apply_ops(&stack_a, &stack_b);
-	if (is_stack_sorted(stack_a))
+	if (is_stack_sorted(stack_a) && stack_b.size == 0)
 		ft_putendl_fd("OK", 1);
 	else
 		ft_putendl_fd("KO", 1);
